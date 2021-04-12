@@ -1,4 +1,6 @@
 {
+  "name": "matcher",
+  "description": "an app that helps people find their perfect match",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1"
