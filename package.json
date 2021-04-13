@@ -7,6 +7,9 @@
     "heroku": "^7.2.0",
     "mongodb": "^3.6.6"
   },
+  "engines": {
+    "node": "^15.12.0"
+  },
   "scripts": {
     "start": "node index.js"
   }
