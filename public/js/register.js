@@ -1,6 +1,5 @@
     const mymap = L.map('mapid').setView([52, 5], 2);
     let marker;
-    const markerArray = [];
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -12,9 +11,12 @@
     }).addTo(mymap);
 
     const onMapClick = e => {
+        if (marker) {
+            mymap.removeLayer(marker)
+            marker = L.marker(e.latlng).addTo(mymap).on('click', onMarkerClick);
+        } else {
         marker = L.marker(e.latlng).addTo(mymap).on('click', onMarkerClick);
-        markerArray.push(e.latlng);
-    }
+    }}
 
     function onMarkerClick() {
         mymap.removeLayer(this);
@@ -24,9 +26,16 @@
 
     const form = document.getElementById('form');
     form.onsubmit = () => {
-        let input = document.createElement("input");
-        input.setAttribute("type", "hidden");
-        input.setAttribute("name", "latlng")
-        input.value = markerArray;
-        form.insertBefore(input, form.childNodes[form.childElementCount])
+        if (marker) {
+        let lat = document.createElement("input");
+        lat.setAttribute("type", "hidden");
+        lat.setAttribute("name", "lat");
+        lat.value = marker._latlng.lat;
+        form.insertBefore(lat, form.childNodes[form.childElementCount]);
+        let lng = document.createElement("input");
+        lng.setAttribute("type", "hidden");
+        lng.setAttribute("name", "lng");
+        lng.value = marker._latlng.lng;
+        form.insertBefore(lng, form.childNodes[form.childElementCount]);
+        }
     }

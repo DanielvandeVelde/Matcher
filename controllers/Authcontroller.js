@@ -15,7 +15,16 @@ userController.register = (req, res) => {
 };
 
 userController.doRegister = (req, res) => {
-  User.register(new User({ username : req.body.username, latlng: req.body.latlng, age: req.body.age, name: req.body.name }), req.body.password, function(err, user) {
+  User.register(new User({ 
+    username : req.body.username,
+    loc: { 
+      type: "Point",
+      coordinates: [Number(req.body.lng), Number(req.body.lat)]
+    },
+    age: req.body.age,
+    name: req.body.name }),
+    req.body.password, function(err, user) {
+
     if (err) {
       return res.render('register', { user : user });
     }

@@ -21,11 +21,13 @@ const UserSchema = new mongoose.Schema(
         type: Date,
         default: Date.now
     },
-    latlng: {
-        type: String
+    loc: {
+        type: { type: String },
+        coordinates: [],
     }
 },{strict: false});
 
+UserSchema.index({loc:"2dsphere"})
 UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);
