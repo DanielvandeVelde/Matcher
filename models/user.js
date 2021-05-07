@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema(
     date: { 
         type: Date,
         default: Date.now
+    },
+    latlng: {
+        type: String
     }
 },{strict: false});
 

@@ -12,3 +12,7 @@ fieldset {
   display: flex;
   flex-direction: column;
 }
+
+#mapid {
+  height: 20em;
+}
