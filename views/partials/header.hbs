@@ -1,8 +1,11 @@
 <header>
     <ul>
         <li><a href="/">Home</a></li>
+        {{#if user}}
+        <li><a href="/logout">Log out</a></li>
+        {{else}}
         <li><a href="/register">Register</a></li>
         <li><a href="/login">Log in</a></li>
-        <li><a href="/logout">Log out</a></li>
+        {{/if}}
     </ul>
 </header>
