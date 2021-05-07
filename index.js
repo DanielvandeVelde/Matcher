@@ -2,61 +2,43 @@ require('dotenv').config();
 
 const express = require("express");
 const exphbs = require("express-handlebars");
-const { MongoClient } = require('mongodb');
+const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport")
 const bodyParser = require("body-parser");
-const Strategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 
 const app = express();
 const port = process.env.PORT || 3000;
 const uri = process.env.DATABASE_URI;
 const secret = process.env.SECRET;
 
-app.engine('.hbs', exphbs({extname:'.hbs'}));
-app.set('view engine', '.hbs');
+mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true })
+.then(() => console.log("Database connection made"))
+.catch((err) => console.error(err));
 
+app.engine('.hbs', exphbs({
+  helpers: require('./helpers/handlebars.js'),
+  extname:'.hbs'
+}));
+app.set('view engine', '.hbs');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session ({
   secret: secret,
   resave: false,
   saveUninitialized: false
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
 
-MongoClient.connect(uri, { useUnifiedTopology: true}, (err, client) => {
-  if(err) { 
-    throw err;
-  }
+const router = require('./router/index.js')
+app.use('/', router)
 
-  const db = client.db('matcher');
-  const users = db.collection('users');
-  app.locals.users = users;
-})
-
-app.get("/", (req, res) => {
-  const users = [
-    {name: "Name 1"}, 
-    {name: "Name 2"},
-    {name: "Name 3"}, 
-    {name: "Name 4"},
-    {name: "Name 5"}, 
-    {name: "Name 6"},
-  ];
-
-  res.render('home', { users });
-});
-
-app.get("/profile", (req, res) => {
-  res.render("profile")
-})
-
-app.get("/login", (req, res) => {
-  res.render("login")
-})
-
-app.get("/register", (req, res) => {
-  res.render("register")
-})
+const User = require('./models/user.js');
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.listen(port, () => console.log(`Listening on localhost:${port}`))
