@@ -4,10 +4,13 @@ const User = require("../models/user.js");
 const userController = {};
 
 userController.home = (req, res) => {
-    if (req.user) {
-        return res.render('secret', { user : req.user });
+    if (!req.user) {
+      return res.render('home');
     }
-    return res.render('home');
+
+    User.find((err, content) => {
+      return res.render('secret', { user : req.user, content: content });
+    })
 };
 
 userController.register = (req, res) => {
@@ -26,7 +29,7 @@ userController.doRegister = (req, res) => {
     req.body.password, function(err, user) {
 
     if (err) {
-      return res.render('register', { user : user });
+      return res.render('register', { err: err});
     }
 
     passport.authenticate('local')(req, res, () => {
