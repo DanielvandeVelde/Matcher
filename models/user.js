@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
-const UserSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
     {
     name: {
         type: String,
@@ -35,7 +35,7 @@ const UserSchema = new mongoose.Schema(
     }
 });
 
-UserSchema.index({loc:"2dsphere"})
-UserSchema.plugin(passportLocalMongoose);
+userSchema.index({loc:"2dsphere"})
+userSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("User", userSchema);

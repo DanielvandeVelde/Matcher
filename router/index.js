@@ -9,7 +9,9 @@ router.post('/register', auth.doRegister);
 
 router.get('/login', auth.login);
 router.post('/login', auth.doLogin);
-
 router.get('/logout', auth.logout);
+
+router.get('/profile/:username', auth.profile);
+router.post('/profile/:username', auth.updateProfile)
 
 module.exports = router;
