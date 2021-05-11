@@ -14,7 +14,10 @@ const port = process.env.PORT || 3000;
 const uri = process.env.DATABASE_URI;
 const secret = process.env.SECRET;
 
-mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(uri, {
+  useUnifiedTopology: true, 
+  useNewUrlParser: true,
+  useCreateIndex: true })
 .then(() => console.log("Database connection made"))
 .catch((err) => console.error(err));
 
