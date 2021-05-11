@@ -1,5 +1,6 @@
-module.exports = {
-   OverviewMapMaker: (content, username ) => {
+const handlebarsHelpers = {}
+
+handlebarsHelpers.overviewMapMaker = content => {
       const markers = content.map(item => {
          return (`L.marker(${item.loc.coordinates[0]},${item.loc.coordinates[1]}).addTo(mymap);`)
       })
@@ -7,17 +8,19 @@ module.exports = {
       return (
       `<script>
      const addMarkers = () => {
-      ${module.exports.MapMarkers(content)}
+      ${handlebarsHelpers.mapMarkers(content)}
       }
      addMarkers();
       </script>`)
-   },
-   MapMarkers: (content) => {
+   }
+
+handlebarsHelpers.mapMarkers = content => {
       let markers;
       content.map((item) => {
          if(item.loc.coordinates[0]) {
          markers += (`marker = L.marker([${parseFloat(item.loc.coordinates[1])},${parseFloat(item.loc.coordinates[0])}]).addTo(mymap);`)
       }})
       return markers 
-   }
-};
+}
+
+module.exports = handlebarsHelpers;

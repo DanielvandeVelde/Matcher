@@ -26,7 +26,7 @@ userController.doRegister = (req, res) => {
     },
     age: req.body.age,
     name: req.body.name }),
-    req.body.password, function(err, user) {
+    req.body.password, (err) => {
 
     if (err) {
       return res.render('register', { err: err});
@@ -43,7 +43,7 @@ userController.login = (req, res) => {
 };
 
 userController.doLogin = (req, res) => {
-  passport.authenticate('local')(req, res, function () {
+  passport.authenticate('local')(req, res, () => {
     res.redirect('/');
   });
 };
@@ -53,5 +53,23 @@ userController.logout = async (req, res) => {
   req.session.destroy();
   res.redirect('/');
 };
+
+userController.profile = (req, res) => {
+  return res.render('profile');
+}
+
+userController.updateProfile = async (req, res) => {
+  const update =  {
+  loc: { 
+    type: "Point",
+    coordinates: [Number(req.body.lng), Number(req.body.lat)]
+  },
+  age: req.body.age,
+  name: req.body.name }
+  const filter = {username : req.body.username}
+  User.findOneAndUpdate(filter, update, { new: true });
+
+  return res.render('profile')
+}
 
 module.exports = userController;
