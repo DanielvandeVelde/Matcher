@@ -14,6 +14,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
    accessToken: 'pk.eyJ1IjoiZGFuZmllbGRlciIsImEiOiJja29lNnVvcHAwMmdpMnVsenJtN3MyMXd1In0.gqLtr0Oao-J5aqvMKwrNxw'
 }).addTo(mymap);
 
-function onMarkerClick() {
+const onMarkerClick = () => {
    mymap.removeLayer(this);
 }

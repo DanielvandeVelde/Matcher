@@ -22,7 +22,7 @@
         marker = L.marker(e.latlng).addTo(mymap).on('click', onMarkerClick);
     }}
 
-    function onMarkerClick() {
+    const onMarkerClick = () => {
         mymap.removeLayer(this);
     }
 
