@@ -1,0 +1,43 @@
+<h1>Editing profile</h1>
+<form action="/edit" id="form" method="POST">
+	<fieldset>
+		<legend>Edit</legend>
+		<label>Name
+			<input type="text" required value="{{user._doc.name}}" name="name" />
+		</label>
+		<label>Age
+			<input
+				type="number"
+				min="18"
+				max="100"
+				required
+				name="age"
+				value="{{user._doc.age}}"
+			/>
+		</label>
+		<p>Change your favorite place?</p>
+		<label id="latlabel">Latitude
+			<input
+				type="number"
+				name="lat"
+				id="lat"
+				step="0.00000000000001"
+				min="-90"
+				max="90"
+				value="{{lat}}"
+			/>
+		</label>
+		<label id="lnglabel">Longitude
+			<input
+				type="number"
+				name="lng"
+				id="lng"
+				step="0.00000000000001"
+				min="-180"
+				max="180"
+				value="{{lng}}"
+			/>
+		</label>
+		<button>Update</button>
+	</fieldset>
+</form>

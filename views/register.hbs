@@ -12,7 +12,14 @@
 		<label>Name
 			<input type="text" required placeholder="name" name="name" /></label>
 		<label>Age
-			<input type="number" required name="age" placeholder="age" /></label>
+			<input
+				type="number"
+				min="18"
+				max="100"
+				required
+				name="age"
+				placeholder="age"
+			/></label>
 		<p>Where do you want to travel to?</p>
 		<label id="latlabel">Latitude
 			<input

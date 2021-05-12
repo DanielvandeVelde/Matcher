@@ -11,12 +11,20 @@ handlebarsHelpers.overviewMapMaker = (content) => {
 
 handlebarsHelpers.mapMarkers = (content) => {
 	let markers = "";
-	content.map((item) => {
-		markers += `marker = L.marker([
+
+	if (Array.isArray(content)) {
+		content.map((item) => {
+			markers += `marker = L.marker([
 				${parseFloat(item.loc.coordinates[1])},
 				${parseFloat(item.loc.coordinates[0])}
 			]).addTo(mymap); `;
-	});
+		});
+	} else {
+		markers += `marker = L.marker([
+			${parseFloat(content.loc.coordinates[1])},
+			${parseFloat(content.loc.coordinates[0])}
+		]).addTo(mymap); `;
+	}
 	return markers;
 };
 

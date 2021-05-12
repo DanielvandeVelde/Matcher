@@ -12,6 +12,7 @@ router.post("/login", auth.doLogin);
 router.get("/logout", auth.logout);
 
 router.get("/profile/:username", auth.profile);
-router.post("/profile/:username", auth.updateProfile);
+router.post("/edit", auth.updateProfile);
+router.get("/edit/:username", auth.editProfile);
 
 module.exports = router;

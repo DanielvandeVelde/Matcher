@@ -60,10 +60,47 @@ userController.logout = async (req, res) => {
 };
 
 userController.profile = (req, res) => {
-	return res.render("profile");
+	User.findOne({ username: req.params.username }, (err, profile) => {
+		if (err) {
+			return res.redirect("/");
+		}
+
+		let userProfile = false;
+		if (req.user) {
+			userProfile = req.params.username === req.user.username;
+		}
+
+		return res.render("profile", {
+			profile: profile,
+			user: req.user,
+			owner: userProfile,
+		});
+	});
 };
 
-userController.updateProfile = async (req, res) => {
+userController.editProfile = (req, res) => {
+	let userProfile = false;
+	let lng;
+	let lat;
+
+	if (req.user) {
+		userProfile = req.params.username === req.user.username;
+		lng = req.user.loc.coordinates[0];
+		lat = req.user.loc.coordinates[1];
+	}
+
+	if (userProfile) {
+		return res.render("edit", {
+			user: req.user,
+			lng: lng,
+			lat: lat,
+		});
+	} else {
+		res.redirect("/profile/" + req.params.username);
+	}
+};
+
+userController.updateProfile = (req, res) => {
 	const update = {
 		loc: {
 			type: "Point",
@@ -72,10 +109,12 @@ userController.updateProfile = async (req, res) => {
 		age: req.body.age,
 		name: req.body.name,
 	};
-	const filter = { username: req.body.username };
-	User.findOneAndUpdate(filter, update, { new: true });
-
-	return res.render("profile");
+	const filter = { username: req.user.username };
+	User.findOneAndUpdate(filter, update, (err, result) => {
+		if (result) {
+			return res.redirect("/profile/" + req.user.username);
+		}
+	});
 };
 
 module.exports = userController;

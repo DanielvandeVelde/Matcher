@@ -1,1 +1,15 @@
-<p> Profile of... </p>
+{{#if user}}
+	{{#if profile}}
+		<h1> Profile of {{profile._doc.username}} </h1>
+		{{#if owner}}
+			<a href="/edit/{{user._doc.username}}">edit</a>
+		{{/if}}
+		<p>Name: {{profile._doc.name}}</p>
+		<p>Age: {{profile._doc.age}}</p>
+	{{else}}
+		<h1>Profile not found</h1>
+		<p>No user found with that username</p>
+	{{/if}}
+{{else}}
+	<p>Please sign-up to view information about one of our users</p>
+{{/if}}

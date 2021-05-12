@@ -16,7 +16,9 @@ const secret = process.env.SECRET;
 mongoose
 	.connect(uri, {
 		useUnifiedTopology: true,
+		useFindAndModify: false,
 		useNewUrlParser: true,
+		useCreateIndex: true,
 	})
 	.then(() => console.log("Database connection made"))
 	.catch((err) => console.error(err));
