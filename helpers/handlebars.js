@@ -92,10 +92,22 @@ handlebarsHelpers.formHandling = (handleForm) => {
 	return formEnhancement;
 };
 
+handlebarsHelpers.userCounter = (content) => {
+	const amountNumber = `${content.length - 1} `;
+	const amountWord = content.length === 2 ? `user` : `users`;
+	const restOfSentence = ` would like to go within 250km of your favorite place`;
+	return amountNumber + amountWord + restOfSentence;
+};
+
 handlebarsHelpers.createOverview = (content) => {
-	return content.map((item) => {
-		return `<a href="/profile/${item.username}">${item.name}, (${item.age})</a>`;
+	let links = "";
+	content.map((item, i) => {
+		links +=
+			i === 0
+				? ``
+				: `<a href="/profile/${item.username}">${item.name}, (${item.age})</a>`;
 	});
+	return links;
 };
 
 module.exports = handlebarsHelpers;
