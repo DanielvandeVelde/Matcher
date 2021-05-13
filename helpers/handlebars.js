@@ -93,8 +93,8 @@ handlebarsHelpers.formHandling = (handleForm) => {
 };
 
 handlebarsHelpers.userCounter = (content) => {
-	const amountNumber = `${content.length - 1} `;
-	const amountWord = content.length === 2 ? `user` : `users`;
+	const amountNumber = content.length > 1 ? content.length - 1 : content.length;
+	const amountWord = content.length === 2 ? ` user` : ` users`;
 	const restOfSentence = ` would like to go within 250km of your favorite place`;
 	return amountNumber + amountWord + restOfSentence;
 };
