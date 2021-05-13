@@ -16,6 +16,7 @@
 			/>
 		</label>
 		<p>Change your favorite place?</p>
+		<section id="mapContainer"></section>
 		<label id="latlabel">Latitude
 			<input
 				type="number"
@@ -38,6 +39,8 @@
 				value="{{lng}}"
 			/>
 		</label>
-		<button>Update</button>
+		<input type="submit" value="Update" />
 	</fieldset>
 </form>
+<script src="/js/createLeafletMap.js"></script>
+{{{mapFunctionalities user true true}}}

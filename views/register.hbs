@@ -7,7 +7,9 @@
 		<label>Username
 			<input type="text" required placeholder="username" name="username" />
 		</label>
-		<label>Password
+		<label><abbr
+				title="Please use a password you're not using for any other site"
+			>Password</abbr>
 			<input type="password" required name="password" /></label>
 		<label>Name
 			<input type="text" required placeholder="name" name="name" /></label>
@@ -42,7 +44,9 @@
 				min="-180"
 				max="180"
 			/></label>
-		<button>Register</button>
+		<section id="mapContainer"></section>
+		<input type="submit" value="Register" />
 	</fieldset>
 </form>
-<script src="js/register.js"></script>
+<script src="/js/createLeafletMap.js"></script>
+{{{mapFunctionalities false true true}}}

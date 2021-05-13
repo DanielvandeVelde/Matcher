@@ -6,6 +6,9 @@
 		{{/if}}
 		<p>Name: {{profile._doc.name}}</p>
 		<p>Age: {{profile._doc.age}}</p>
+		<section id="mapContainer"></section>
+		<script src="/js/createLeafletMap.js"></script>
+		{{{mapFunctionalities profile false false}}}
 	{{else}}
 		<h1>Profile not found</h1>
 		<p>No user found with that username</p>

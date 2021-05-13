@@ -9,7 +9,7 @@ userController.home = (req, res) => {
 	}
 
 	User.find((err, content) => {
-		return res.render("secret", { user: req.user, content: content });
+		return res.render("overview", { user: req.user, content: content });
 	});
 };
 
@@ -101,6 +101,7 @@ userController.editProfile = (req, res) => {
 };
 
 userController.updateProfile = (req, res) => {
+	console.log("update attempt");
 	const update = {
 		loc: {
 			type: "Point",
@@ -111,6 +112,9 @@ userController.updateProfile = (req, res) => {
 	};
 	const filter = { username: req.user.username };
 	User.findOneAndUpdate(filter, update, (err, result) => {
+		if (err) {
+			console.log(err);
+		}
 		if (result) {
 			return res.redirect("/profile/" + req.user.username);
 		}
