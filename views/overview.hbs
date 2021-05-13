@@ -1,6 +1,8 @@
 <h2>Logged-in Home</h2>
 <p>Hi, {{{user._doc.name}}}</p>
-<p>Other users would like to go here:</p>
+<p>{{content.length}}
+	user(s) would like to go within 250km of your favorite place</p>
 <section id="mapContainer"></section>
+{{{createOverview content}}}
 <script src="/js/createLeafletMap.js"></script>
 {{{mapFunctionalities content false false}}}

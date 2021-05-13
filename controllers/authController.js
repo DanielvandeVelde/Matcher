@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const passport = require("passport");
+const user = require("../models/user.js");
 const User = require("../models/user.js");
 const userController = {};
 
@@ -8,7 +9,21 @@ userController.home = (req, res) => {
 		return res.render("home");
 	}
 
-	User.find((err, content) => {
+	User.find({
+		loc: {
+			$near: {
+				$maxDistance: 250000, //250km
+				$geometry: {
+					type: "Point",
+					coordinates: req.user.loc.coordinates,
+				},
+			},
+		},
+	}).find((err, data) => {
+		const removeUser = (record) => {
+			return record.username !== req.user.username ? record : "";
+		};
+		const content = data.filter(removeUser);
 		return res.render("overview", { user: req.user, content: content });
 	});
 };
@@ -101,7 +116,6 @@ userController.editProfile = (req, res) => {
 };
 
 userController.updateProfile = (req, res) => {
-	console.log("update attempt");
 	const update = {
 		loc: {
 			type: "Point",

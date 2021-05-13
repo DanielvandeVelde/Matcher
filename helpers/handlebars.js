@@ -77,4 +77,10 @@ handlebarsHelpers.formHandling = (handleForm) => {
 	return formEnhancement;
 };
 
+handlebarsHelpers.createOverview = (content) => {
+	return content.map((item) => {
+		return `<a href="/profile/${item.username}">${item.name}, (${item.age})</a>`;
+	});
+};
+
 module.exports = handlebarsHelpers;
