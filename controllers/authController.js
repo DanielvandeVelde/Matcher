@@ -19,11 +19,7 @@ userController.home = (req, res) => {
 				},
 			},
 		},
-	}).find((err, data) => {
-		const removeUser = (record) => {
-			return record.username !== req.user.username ? record : "";
-		};
-		const content = data.filter(removeUser);
+	}).find((err, content) => {
 		return res.render("overview", { user: req.user, content: content });
 	});
 };
