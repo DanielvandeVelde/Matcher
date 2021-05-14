@@ -8,7 +8,7 @@ userController.home = (req, res) => {
 		return res.render("home");
 	}
 
-	User.find({
+	const request = {
 		loc: {
 			$near: {
 				$maxDistance: 250000, //250km
@@ -18,14 +18,19 @@ userController.home = (req, res) => {
 				},
 			},
 		},
-		gender: req.user.looking,
-	})
-		.where("looking")
-		.in([req.user.gender, "No preference"])
-		.find((err, data) => {
-			const content = [req.user].concat(data);
-			return res.render("overview", { user: req.user, content: content });
-		});
+		username: { $ne: req.user.username },
+		looking: { $in: [req.user.gender, "No preference"] },
+	};
+
+	//If no preference, gender query is not needed
+	if (req.user.looking !== "No preference") {
+		request["gender"] = req.user.looking;
+	}
+
+	User.find(request).exec((err, data) => {
+		const content = [req.user].concat(data);
+		return res.render("overview", { user: req.user, content: content });
+	});
 };
 
 userController.register = (req, res) => {
