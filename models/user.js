@@ -36,6 +36,14 @@ const userSchema = new mongoose.Schema({
 		coordinates: {
 			type: [Number, Number],
 			required: [true, "Enter a place"],
+			validate: {
+				validator: (array) => {
+					let validate = array.filter((number) => {
+						Number(number);
+					});
+					return validate.length > 1 ? true : false;
+				},
+			},
 		},
 	},
 	date: {

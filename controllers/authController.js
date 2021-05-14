@@ -45,9 +45,7 @@ userController.doRegister = (req, res) => {
 		(err) => {
 			if (err) {
 				console.log(err);
-				return res.render("register", {
-					err: "Something went terribly wrong ¯\\_(ツ)_/¯",
-				});
+				return res.render("register", { err: err });
 			}
 
 			passport.authenticate("local")(req, res, () => {

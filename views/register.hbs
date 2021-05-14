@@ -1,6 +1,6 @@
 <h1>Register</h1>
 {{#if err}}
-	<p>{{err}}</p>
+	<h2>{{err.message}}</h2>
 {{/if}}
 <form action="/register" id="form" method="POST">
 	<fieldset>
