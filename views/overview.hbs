@@ -1,7 +1,9 @@
 <h1>Overview</h1>
 <p>Hi, {{{user._doc.name}}}</p>
-<p>{{{userCounter content}}}</p>
+<p id="counter">{{{userCounter content}}}</p>
 <section id="mapContainer"></section>
-{{{createOverview content}}}
+<ul id="overview">
+	{{{createOverview content}}}
+</ul>
 <script src="/js/createLeafletMap.js"></script>
 {{{mapFunctionalities content false false}}}

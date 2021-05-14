@@ -33,7 +33,7 @@ handlebarsHelpers.mapMarkers = (content) => {
 					markers += `marker = L.marker([
 					${parseFloat(item.loc.coordinates[1])},
 					${parseFloat(item.loc.coordinates[0])}
-				]).addTo(mymap).bindPopup('<a href="#item-${i}">${item.name}</a>'); `;
+				]).addTo(mymap).bindPopup('<a href="#user${i}">${item.name}</a>'); `;
 				}
 			});
 		} else {
@@ -105,7 +105,7 @@ handlebarsHelpers.createOverview = (content) => {
 		links +=
 			i === 0
 				? ``
-				: `<a name="item-${i}" href="/profile/${item.username}">${item.name}, (${item.age})</a>`;
+				: `<li id="user${i}"><a href="/profile/${item.username}">${item.name}, (${item.age})</a></li>`;
 	});
 	return links;
 };
