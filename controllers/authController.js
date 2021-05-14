@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const passport = require("passport");
-const user = require("../models/user.js");
 const User = require("../models/user.js");
 const userController = {};
 
