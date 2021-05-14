@@ -6,6 +6,12 @@
 		{{/if}}
 		<p>Name: {{profile._doc.name}}</p>
 		<p>Age: {{profile._doc.age}}</p>
+		<p>Gender: {{profile._doc.gender}}</p>
+		<a href="mailto:{{profile._doc.email}}">{{profile._doc.email}}</a>
+		<p>Their favorite spot is:
+			{{{calculateDistance user profile}}}
+			km away from yours!</p>
+		<p>Member since: {{{formatDate profile._doc.date}}}</p>
 		<section id="mapContainer"></section>
 		<script src="/js/createLeafletMap.js"></script>
 		{{{mapFunctionalities profile false false}}}

@@ -12,8 +12,17 @@
 				title="Please use a password you're not using for any other site"
 			>Password</abbr>
 			<input type="password" required name="password" /></label>
+		<label>Email
+			<input type="email" required placeholder="email" name="email" />
+		</label>
 		<label>Name
 			<input type="text" required placeholder="name" name="name" /></label>
+		<label>I am a
+			<select name="gender">
+				<option value="Man">Man</option>
+				<option value="Woman">Woman</option>
+			</select>
+		</label>
 		<label>Age
 			<input
 				type="number"
@@ -22,7 +31,15 @@
 				required
 				name="age"
 				placeholder="age"
-			/></label>
+			/>
+		</label>
+		<label>Looking for a
+			<select name="looking">
+				<option value="Man">Man</option>
+				<option value="Woman">Woman</option>
+				<option default value="No preference">No preference</option>
+			</select>
+		</label>
 		<p>Where do you want to travel to?</p>
 		<label id="latlabel">Latitude
 			<input

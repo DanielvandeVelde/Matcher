@@ -110,4 +110,34 @@ handlebarsHelpers.createOverview = (content) => {
 	return links;
 };
 
+handlebarsHelpers.calculateDistance = (user, profile) => {
+	//https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
+	function distance(lat1, lon1, lat2, lon2) {
+		var p = 0.017453292519943295; // Math.PI / 180
+		var c = Math.cos;
+		var a =
+			0.5 -
+			c((lat2 - lat1) * p) / 2 +
+			(c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p))) / 2;
+
+		return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+	}
+	return distance(
+		user.loc.coordinates[0],
+		user.loc.coordinates[1],
+		profile.loc.coordinates[0],
+		profile.loc.coordinates[1]
+	).toFixed(2);
+};
+
+handlebarsHelpers.formatDate = (date) => {
+	const options = {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	};
+	const readableDate = date.toLocaleDateString(undefined, options);
+	return readableDate;
+};
+
 module.exports = handlebarsHelpers;

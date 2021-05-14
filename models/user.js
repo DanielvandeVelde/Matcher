@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new mongoose.Schema({
-	name: {
-		type: String,
-		required: true,
-	},
 	username: {
 		type: String,
 		required: true,
@@ -14,14 +10,26 @@ const userSchema = new mongoose.Schema({
 	password: {
 		type: String,
 	},
+	email: {
+		type: String,
+		required: true,
+	},
+	name: {
+		type: String,
+		required: true,
+	},
+	gender: {
+		type: String,
+		required: true,
+	},
 	age: {
 		type: Number,
 		min: [18, "Not for {VALUE} year olds only 18+"],
 		max: [100, "Isn't {VALUE} too old to be traveling?"],
 	},
-	date: {
-		type: Date,
-		default: Date.now,
+	looking: {
+		type: String,
+		required: true,
 	},
 	loc: {
 		type: { type: String, required: true },
@@ -29,6 +37,10 @@ const userSchema = new mongoose.Schema({
 			type: [Number, Number],
 			required: [true, "Enter a place"],
 		},
+	},
+	date: {
+		type: Date,
+		default: Date.now,
 	},
 });
 
