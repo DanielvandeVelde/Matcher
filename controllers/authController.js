@@ -18,9 +18,14 @@ userController.home = (req, res) => {
 				},
 			},
 		},
-	}).find((err, content) => {
-		return res.render("overview", { user: req.user, content: content });
-	});
+		gender: req.user.looking,
+	})
+		.where("looking")
+		.in([req.user.gender, "No preference"])
+		.find((err, data) => {
+			const content = [req.user].concat(data);
+			return res.render("overview", { user: req.user, content: content });
+		});
 };
 
 userController.register = (req, res) => {

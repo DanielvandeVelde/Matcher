@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
 			validate: {
 				validator: (array) => {
 					let validate = array.filter((number) => {
-						Number(number);
+						return Number(number);
 					});
 					return validate.length > 1 ? true : false;
 				},
