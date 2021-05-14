@@ -15,6 +15,28 @@
 				value="{{user._doc.age}}"
 			/>
 		</label>
+		<label>I am a
+			<select name="gender">
+				<option value="Man" {{isDefault user._doc.gender "Man"}}>Man</option>
+				<option
+					value="Woman"
+					{{isDefault user._doc.gender "Woman"}}
+				>Woman</option>
+			</select>
+		</label>
+		<label>Looking for a
+			<select name="looking">
+				<option value="Man" {{isDefault user._doc.looking "Man"}}>Man</option>
+				<option
+					value="Woman"
+					{{isDefault user._doc.looking "Woman"}}
+				>Woman</option>
+				<option
+					value="No preference"
+					{{isDefault user._doc.looking "No preference"}}
+				>No preference</option>
+			</select>
+		</label>
 		<p>Change your favorite place?</p>
 		<section id="mapContainer"></section>
 		<label id="latlabel">Latitude

@@ -32,16 +32,20 @@ userController.doRegister = (req, res) => {
 	User.register(
 		new User({
 			username: req.body.username,
+			email: req.body.email,
+			name: req.body.name,
+			gender: req.body.gender,
+			age: req.body.age,
+			looking: req.body.looking,
 			loc: {
 				type: "Point",
 				coordinates: [Number(req.body.lng), Number(req.body.lat)],
 			},
-			age: req.body.age,
-			name: req.body.name,
 		}),
 		req.body.password,
 		(err) => {
 			if (err) {
+				console.log(err);
 				return res.render("register", {
 					err: "Something went terribly wrong ¯\\_(ツ)_/¯",
 				});
@@ -113,12 +117,15 @@ userController.editProfile = (req, res) => {
 
 userController.updateProfile = (req, res) => {
 	const update = {
+		email: req.body.email,
+		name: req.body.name,
+		gender: req.body.gender,
+		age: req.body.age,
+		looking: req.body.looking,
 		loc: {
 			type: "Point",
 			coordinates: [Number(req.body.lng), Number(req.body.lat)],
 		},
-		age: req.body.age,
-		name: req.body.name,
 	};
 	const filter = { username: req.user.username };
 	User.findOneAndUpdate(filter, update, (err, result) => {

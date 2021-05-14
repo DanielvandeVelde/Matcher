@@ -140,4 +140,10 @@ handlebarsHelpers.formatDate = (date) => {
 	return readableDate;
 };
 
+handlebarsHelpers.isDefault = (profileValue, elementValue) => {
+	if (profileValue === elementValue) {
+		return `selected`;
+	}
+};
+
 module.exports = handlebarsHelpers;
