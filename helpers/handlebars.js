@@ -28,19 +28,19 @@ handlebarsHelpers.mapMarkers = (content) => {
 					markers += `marker = L.marker([
 					${parseFloat(item.loc.coordinates[1])},
 					${parseFloat(item.loc.coordinates[0])}
-				], {icon: redIcon}).addTo(mymap); `;
+				], {icon: redIcon}).addTo(mymap).bindPopup('You 🤠'); `;
 				} else {
 					markers += `marker = L.marker([
 					${parseFloat(item.loc.coordinates[1])},
 					${parseFloat(item.loc.coordinates[0])}
-				]).addTo(mymap); `;
+				]).addTo(mymap).bindPopup('<a href="#item-${i}">${item.name}</a>'); `;
 				}
 			});
 		} else {
 			markers += `marker = L.marker([
 			${parseFloat(content.loc.coordinates[1])},
 			${parseFloat(content.loc.coordinates[0])}
-		], {icon: redIcon).addTo(mymap); `;
+		], {icon: redIcon}).addTo(mymap); `;
 		}
 	}
 	return markers;
@@ -105,7 +105,7 @@ handlebarsHelpers.createOverview = (content) => {
 		links +=
 			i === 0
 				? ``
-				: `<a href="/profile/${item.username}">${item.name}, (${item.age})</a>`;
+				: `<a name="item-${i}" href="/profile/${item.username}">${item.name}, (${item.age})</a>`;
 	});
 	return links;
 };
