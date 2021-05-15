@@ -26,7 +26,7 @@ html {
 
 #mapid {
   height: 20em;
-  width: 41.5em;
+  width: 100%;
 }
 
 header {
@@ -82,7 +82,7 @@ header a:hover strong::before {
 
 main {
   padding: 2em;
-  width: 32em;
+  max-width: 30em;
   margin: 5em auto;
   border-radius: 0.5em;
   background-color: #fff;
