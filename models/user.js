@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
 					let validate = array.filter((number) => {
 						return Number(number);
 					});
-					return validate.length > 1 ? true : false;
+					return validate.length === 2 ? true : false;
 				},
 			},
 		},
