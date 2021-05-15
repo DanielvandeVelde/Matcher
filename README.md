@@ -29,11 +29,13 @@ Then, navigate to this folder and run:
 npm install
 ```
 
-Last,
+To start:
 
 ```bash
 npm start
 ```
+
+But please be advised that you will need a [.env-file like the example I've provided](https://github.com/DanielvandeVelde/Matcher/blob/main/.env.example)
 
 ## 🗃 Data
 
