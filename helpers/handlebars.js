@@ -93,7 +93,8 @@ handlebarsHelpers.formHandling = (handleForm) => {
 };
 
 handlebarsHelpers.userCounter = (content) => {
-  const amountNumber = content.length > 1 ? content.length - 1 : content.length;
+  const amountNumber =
+    content.length >= 1 ? content.length - 1 : content.length;
   const amountWord = content.length === 2 ? ` user` : ` users`;
   return amountNumber + amountWord;
 };

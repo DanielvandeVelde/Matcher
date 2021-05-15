@@ -146,12 +146,12 @@ fieldset > input[type="submit"]:focus {
 }
 
 #matchMade > form input[type="submit"] {
-  background-color: #f04747;
+  background-color: #d71111;
 }
 
 #matchMade > form input[type="submit"]:hover,
 #matchMade > form input[type="submit"]:focus {
-  background-color: #d71111;
+  background-color: #a10c0c;
 }
 
 #accept input[type="submit"] {

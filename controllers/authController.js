@@ -50,6 +50,7 @@ userController.doRegister = (req, res) => {
         type: "Point",
         coordinates: [Number(req.body.lng), Number(req.body.lat)],
       },
+      likes: [],
     }),
     req.body.password,
     (err) => {
@@ -129,26 +130,30 @@ userController.editProfile = (req, res) => {
 };
 
 userController.updateProfile = (req, res) => {
-  const update = {
-    email: req.body.email,
-    name: req.body.name,
-    gender: req.body.gender,
-    age: req.body.age,
-    looking: req.body.looking,
-    loc: {
-      type: "Point",
-      coordinates: [Number(req.body.lng), Number(req.body.lat)],
-    },
-  };
-  const filter = { username: req.user.username };
-  User.findOneAndUpdate(filter, update, (err, result) => {
-    if (err) {
-      console.log(err);
-    }
-    if (result) {
-      return res.redirect("/profile/" + req.user.username);
-    }
-  });
+  if (req.user) {
+    const update = {
+      email: req.body.email,
+      name: req.body.name,
+      gender: req.body.gender,
+      age: req.body.age,
+      looking: req.body.looking,
+      loc: {
+        type: "Point",
+        coordinates: [Number(req.body.lng), Number(req.body.lat)],
+      },
+    };
+    const filter = { username: req.user.username };
+    User.findOneAndUpdate(filter, update, (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      if (result) {
+        return res.redirect("/profile/" + req.user.username);
+      }
+    });
+  } else {
+    return res.redirect("/");
+  }
 };
 
 userController.likeUser = (req, res) => {
@@ -169,6 +174,21 @@ userController.likeUser = (req, res) => {
       return res.redirect("/profile/" + req.body.username);
     }
   });
+};
+
+userController.showMatches = (req, res) => {
+  if (req.user) {
+    User.find({ likes: req.user.username }, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const content = [req.user].concat(result);
+        return res.render("matches", { user: req.user, content: content });
+      }
+    });
+  } else {
+    return res.redirect("/");
+  }
 };
 
 module.exports = userController;

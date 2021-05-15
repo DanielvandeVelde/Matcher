@@ -14,7 +14,7 @@ router.get("/logout", auth.logout);
 router.get("/profile/:username", auth.profile);
 router.get("/edit/:username", auth.editProfile);
 router.post("/edit", auth.updateProfile);
-
 router.post("/likes", auth.likeUser);
+router.get("/matches", auth.showMatches);
 
 module.exports = router;
