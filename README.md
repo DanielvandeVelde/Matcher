@@ -2,7 +2,7 @@
 
 <kbd>![Site image](https://raw.githubusercontent.com/DanielvandeVelde/Matcher/master/docs/hero.png "Site image")</kbd>
 
-A live version of this application is running [here](https://be-matcher.herokuapp.com/)
+A live version of this application is running [here](https://be-matcher.herokuapp.com/)  
 I suggest checking out the [Wiki](https://github.com/DanielvandeVelde/Matcher/wiki) for information on the process.  
 
 ## ✅ To-do
@@ -38,8 +38,8 @@ npm start
 ## 🗃 Data
 
 Data in this application is coming from a mongodb server.  
-You can populate this yourself, taking note of what it should look like in the [User model](https://github.com/DanielvandeVelde/Matcher/blob/main/models/user.js). 
-Or by letting users register themselves. 
+You can populate this yourself, taking note of what it should look like in the [User model](https://github.com/DanielvandeVelde/Matcher/blob/main/models/user.js).   
+Or by letting users register themselves.  
 
 ## ℹ️ Resources
 
