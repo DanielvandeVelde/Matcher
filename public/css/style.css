@@ -19,14 +19,17 @@ html {
   width: 100%;
 }
 
-#mapContainer,
-#mapid {
-  margin: 0 auto;
+#mapContainer {
+  position: relative;
+  height: 15em;
 }
 
 #mapid {
+  position: absolute;
   height: 20em;
-  width: 35em;
+  top: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 header {
