@@ -50,8 +50,9 @@ Or by letting users register themselves.
 - [Box-shadow](https://www.cssmatic.com/box-shadow)
 - [MDN docs](https://developer.mozilla.org/en-US/)
 - [Mongoose docs](https://mongoosejs.com/docs/api.html)
+- [MongoDB docs](https://docs.mongodb.com/v4.0/reference/operator/query/)
 - [Pompebled (background SVG used)](https://en.wikipedia.org/wiki/Seeblatt#/media/File:Pompebled.svg)
-- [~13 year old SO question for distance measurement](https://stackoverflow.com/a/21623206)
+- [SO question from 2008 for distance measurement](https://stackoverflow.com/a/21623206)
 - [Leaflet (open-source JavaScript library for mobile-friendly interactive maps)](https://leafletjs.com/)
 - [Leaflet color markers](https://github.com/pointhi/leaflet-color-markers)
 
