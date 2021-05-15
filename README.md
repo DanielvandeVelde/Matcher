@@ -48,7 +48,7 @@ Or by letting users register themselves.
 - [Box-shadow](https://www.cssmatic.com/box-shadow)
 - [MDN docs](https://developer.mozilla.org/en-US/)
 - [Mongoose docs](https://mongoosejs.com/docs/api.html)
-- [Pompebled (background SVG used)](https://en.wikipedia.org/wiki/Seeblatt)
+- [Pompebled (background SVG used)](https://en.wikipedia.org/wiki/Seeblatt#/media/File:Pompebled.svg)
 - [Distance measurement](https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula)
 - [Leaflet color markers](https://github.com/pointhi/leaflet-color-markers)
 
