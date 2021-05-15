@@ -87,16 +87,22 @@ userController.profile = (req, res) => {
       return res.redirect("/");
     }
 
-    let userProfile = false;
-    if (req.user) {
-      userProfile = req.params.username === req.user.username;
-    }
-
-    return res.render("profile", {
+    const data = {
       profile: profile,
       user: req.user,
-      owner: userProfile,
-    });
+    };
+
+    if (req.user) {
+      data["owner"] = req.params.username === req.user.username;
+      data["likes"] = req.user.likes.filter(
+        (like) => like === req.params.username
+      );
+      data["liked"] = profile.likes.filter(
+        (like) => like === req.user.username
+      );
+    }
+
+    return res.render("profile", data);
   });
 };
 
@@ -141,6 +147,26 @@ userController.updateProfile = (req, res) => {
     }
     if (result) {
       return res.redirect("/profile/" + req.user.username);
+    }
+  });
+};
+
+userController.likeUser = (req, res) => {
+  const update = {};
+
+  if (req.body.feeling === "love") {
+    update["$push"] = { likes: [req.body.username] };
+  } else if (req.body.feeling === "hate") {
+    update["$pull"] = { likes: req.body.username };
+  }
+
+  const filter = { username: req.user.username };
+  User.findOneAndUpdate(filter, update, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    if (result) {
+      return res.redirect("/profile/" + req.body.username);
     }
   });
 };

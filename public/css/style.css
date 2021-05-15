@@ -122,7 +122,9 @@ main > p {
 }
 
 main > a,
-fieldset > input[type="submit"] {
+fieldset > input[type="submit"],
+#matchMade > a {
+  cursor: pointer;
   transition: 0.2s;
   display: block;
   text-align: center;
@@ -141,6 +143,24 @@ main > a:focus,
 fieldset > input[type="submit"]:hover,
 fieldset > input[type="submit"]:focus {
   background-color: #f46c75;
+}
+
+#matchMade > form input[type="submit"] {
+  background-color: #f04747;
+}
+
+#matchMade > form input[type="submit"]:hover,
+#matchMade > form input[type="submit"]:focus {
+  background-color: #d71111;
+}
+
+#accept input[type="submit"] {
+  background-color: #43b581;
+}
+
+#accept > input[type="submit"]:hover,
+#accept > input[type="submit"]:focus {
+  background-color: #328760;
 }
 
 fieldset {

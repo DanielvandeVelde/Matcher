@@ -15,4 +15,6 @@ router.get("/profile/:username", auth.profile);
 router.get("/edit/:username", auth.editProfile);
 router.post("/edit", auth.updateProfile);
 
+router.post("/likes", auth.likeUser);
+
 module.exports = router;

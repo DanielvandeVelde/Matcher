@@ -50,6 +50,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  likes: {
+    type: [String],
+    default: undefined,
+  },
 });
 
 userSchema.index({ loc: "2dsphere" });

@@ -15,8 +15,87 @@
       {{{calculateDistance user profile}}}
       km away from yours!</h2>
     <section id="mapContainer"></section>
-    <a href="mailto:{{profile._doc.email}}">Send an email to:
-      {{profile._doc.email}}</a>
+    {{#if liked.length}}
+
+      {{#if likes.length}}
+        <div id="matchMade">
+          <a href="mailto:{{profile._doc.email}}">Send an email to:
+            {{profile._doc.email}}
+          </a>
+          <form action="/likes" action="POST">
+            <fieldset>
+              <input
+                name="username"
+                value="{{profile._doc.username}}"
+                type="hidden"
+              />
+              <input name="feeling" value="hate" type="hidden" />
+              <input
+                type="submit"
+                value="Remove match"
+                formmethod="POST"
+                formaction="/likes"
+              />
+            </fieldset>
+          </form>
+        </div>
+      {{else}}
+        <form action="/likes" action="POST">
+          <fieldset id="accept">
+            <input
+              name="username"
+              value="{{profile._doc.username}}"
+              type="hidden"
+            />
+            <input name="feeling" value="love" type="hidden" />
+            <input
+              type="submit"
+              value="Accept match"
+              formmethod="POST"
+              formaction="/likes"
+            />
+          </fieldset>
+        </form>
+      {{/if}}
+
+    {{else if owner}}
+      <a href="mailto:{{profile._doc.email}}">Send an email to:
+        {{profile._doc.email}}</a>
+    {{else if likes.length}}
+      <form action="/likes" action="POST">
+        <fieldset>
+          <input
+            name="username"
+            value="{{profile._doc.username}}"
+            type="hidden"
+          />
+          <input name="feeling" value="hate" type="hidden" />
+          <input
+            type="submit"
+            value="Retract request to send messages"
+            formmethod="POST"
+            formaction="/likes"
+          />
+        </fieldset>
+      </form>
+    {{else}}
+      <form action="/likes" action="POST">
+        <fieldset>
+          <input
+            name="username"
+            value="{{profile._doc.username}}"
+            type="hidden"
+          />
+          <input name="feeling" value="love" type="hidden" />
+          <input
+            type="submit"
+            value="Ask to send messages"
+            formmethod="POST"
+            formaction="/likes"
+          />
+        </fieldset>
+      </form>
+    {{/if}}
     <script src="/js/createLeafletMap.js"></script>
     {{{mapFunctionalities profile false false}}}
   {{else}}
