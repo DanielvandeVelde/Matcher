@@ -1,70 +1,70 @@
 <h1>Register</h1>
 {{#if err}}
-	<h2>{{err.message}}</h2>
+  <h2>{{err.message}}</h2>
 {{/if}}
 <form action="/register" id="form" method="POST">
-	<fieldset>
-		<legend>Register:</legend>
-		<label>Username
-			<input type="text" required placeholder="username" name="username" />
-		</label>
-		<label><abbr
-				title="Please use a password you're not using for any other site"
-			>Password</abbr>
-			<input type="password" required name="password" /></label>
-		<label>Email
-			<input type="email" required placeholder="email" name="email" />
-		</label>
-		<label>Name
-			<input type="text" required placeholder="name" name="name" /></label>
-		<label>I am a
-			<select name="gender">
-				<option value="Man">Man</option>
-				<option value="Woman">Woman</option>
-			</select>
-		</label>
-		<label>Age
-			<input
-				type="number"
-				min="18"
-				max="100"
-				required
-				name="age"
-				placeholder="age"
-			/>
-		</label>
-		<label>Looking for a
-			<select name="looking">
-				<option value="Man">Man</option>
-				<option value="Woman">Woman</option>
-				<option default value="No preference">No preference</option>
-			</select>
-		</label>
-		<p>Where do you want to travel to?</p>
-		<label id="latlabel">Latitude
-			<input
-				type="number"
-				placeholder="52.3779"
-				name="lat"
-				id="lat"
-				step="0.00000000000001"
-				min="-90"
-				max="90"
-			/>
-		</label>
-		<label id="lnglabel">Longitude
-			<input
-				type="number"
-				placeholder="4.9041"
-				name="lng"
-				id="lng"
-				step="0.00000000000001"
-				min="-180"
-				max="180"
-			/></label>
-		<section id="mapContainer"></section>
-		<input type="submit" value="Register" />
-	</fieldset>
+  <fieldset>
+    <legend>Register:</legend>
+    <label>Username
+      <input type="text" required placeholder="username" name="username" />
+    </label>
+    <label><abbr
+        title="Please use a password you're not using for any other site"
+      >Password</abbr>
+      <input type="password" required name="password" /></label>
+    <label>Email
+      <input type="email" required placeholder="email" name="email" />
+    </label>
+    <label>Name
+      <input type="text" required placeholder="name" name="name" /></label>
+    <label>I am a
+      <select name="gender">
+        <option value="Man">Man</option>
+        <option value="Woman">Woman</option>
+      </select>
+    </label>
+    <label>Age
+      <input
+        type="number"
+        min="18"
+        max="100"
+        required
+        name="age"
+        placeholder="age"
+      />
+    </label>
+    <label>Looking for a
+      <select name="looking">
+        <option value="Man">Man</option>
+        <option value="Woman">Woman</option>
+        <option default value="No preference">No preference</option>
+      </select>
+    </label>
+    <p>Where do you want to travel to?</p>
+    <label id="latlabel">Latitude
+      <input
+        type="number"
+        placeholder="52.3779"
+        name="lat"
+        id="lat"
+        step="0.00000000000001"
+        min="-90"
+        max="90"
+      />
+    </label>
+    <label id="lnglabel">Longitude
+      <input
+        type="number"
+        placeholder="4.9041"
+        name="lng"
+        id="lng"
+        step="0.00000000000001"
+        min="-180"
+        max="180"
+      /></label>
+    <section id="mapContainer"></section>
+    <input type="submit" value="Register" />
+  </fieldset>
 </form>
 <script src="/js/createLeafletMap.js"></script>
 {{{mapFunctionalities false true true}}}

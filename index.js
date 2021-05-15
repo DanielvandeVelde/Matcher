@@ -14,31 +14,31 @@ const uri = process.env.DATABASE_URI;
 const secret = process.env.SECRET;
 
 mongoose
-	.connect(uri, {
-		useUnifiedTopology: true,
-		useFindAndModify: false,
-		useNewUrlParser: true,
-		useCreateIndex: true,
-	})
-	.then(() => console.log("Database connection made"))
-	.catch((err) => console.error(err));
+  .connect(uri, {
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  })
+  .then(() => console.log("Database connection made"))
+  .catch((err) => console.error(err));
 
 app.engine(
-	".hbs",
-	exphbs({
-		helpers: require("./helpers/handlebars.js"),
-		extname: ".hbs",
-	})
+  ".hbs",
+  exphbs({
+    helpers: require("./helpers/handlebars.js"),
+    extname: ".hbs",
+  })
 );
 app.set("view engine", ".hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
 app.use(
-	session({
-		secret: secret,
-		resave: false,
-		saveUninitialized: false,
-	})
+  session({
+    secret: secret,
+    resave: false,
+    saveUninitialized: false,
+  })
 );
 app.use(passport.initialize());
 app.use(passport.session());

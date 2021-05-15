@@ -1,13 +1,13 @@
 <header>
-	<ul>
-		<li><a href="/"><strong>Map</strong>Matcher</a></li>
-		{{#if user}}
-			<li><a href="/logout">Log out</a></li>
-			<li><a href="/profile/{{user._doc.username}}">
-					{{user._doc.name}}</a></li>
-		{{else}}
-			<li><a href="/register">Register</a></li>
-			<li><a href="/login">Log in</a></li>
-		{{/if}}
-	</ul>
+  <ul>
+    <li><a href="/"><strong>Map</strong>Matcher</a></li>
+    {{#if user}}
+      <li><a href="/logout">Log out</a></li>
+      <li><a href="/profile/{{user._doc.username}}">
+          {{user._doc.name}}</a></li>
+    {{else}}
+      <li><a href="/register">Register</a></li>
+      <li><a href="/login">Log in</a></li>
+    {{/if}}
+  </ul>
 </header>
