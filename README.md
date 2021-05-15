@@ -51,7 +51,7 @@ Or by letting users register themselves.
 - [MDN docs](https://developer.mozilla.org/en-US/)
 - [Mongoose docs](https://mongoosejs.com/docs/api.html)
 - [Pompebled (background SVG used)](https://en.wikipedia.org/wiki/Seeblatt#/media/File:Pompebled.svg)
-- [Distance measurement](https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula)
+- [~13 year old SO question for distance measurement](https://stackoverflow.com/a/21623206)
 - [Leaflet (open-source JavaScript library for mobile-friendly interactive maps)](https://leafletjs.com/)
 - [Leaflet color markers](https://github.com/pointhi/leaflet-color-markers)
 
