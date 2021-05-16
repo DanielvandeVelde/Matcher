@@ -8,6 +8,11 @@ strong {
 
 html {
   scroll-behavior: smooth;
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
   background: 100% 100% url(/img/pompebled.svg) no-repeat,
     linear-gradient(
       180deg,
