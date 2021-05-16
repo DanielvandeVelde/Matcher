@@ -8,11 +8,11 @@ I suggest checking out the [Wiki](https://github.com/DanielvandeVelde/Matcher/wi
 ## ✅ To-do
 - [x] Update readme
 - [x] Update wiki further
-- [ ] Add another feature
+- [x] Add another feature
 - [ ] Build scripts
 - [ ] Improve error-handling
 - [ ] PWA (+ improve accessibility, render-blocking, etc)
-- [ ] Add states
+- [ ] Add proper states
 
 ## 📋 Concept
 This Matcher repository is for 'MapMatcher' a _"datingsite"_ that tries to connect people that want to go to the same destination.  
@@ -45,8 +45,6 @@ Or by letting users register themselves.
 
 ## ℹ️ Resources
 
-### Sources
-
 - [Box-shadow](https://www.cssmatic.com/box-shadow)
 - [MDN docs](https://developer.mozilla.org/en-US/)
 - [Mongoose docs](https://mongoosejs.com/docs/api.html)
@@ -55,6 +53,7 @@ Or by letting users register themselves.
 - [SO question from 2008 for distance measurement](https://stackoverflow.com/a/21623206)
 - [Leaflet (open-source JavaScript library for mobile-friendly interactive maps)](https://leafletjs.com/)
 - [Leaflet color markers](https://github.com/pointhi/leaflet-color-markers)
+- [Pinetools Darken color](https://pinetools.com/darken-color)
 
 ## 🗺️ License
 
