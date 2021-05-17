@@ -14,10 +14,6 @@ https://project-tech-2021.herokuapp.com/login
 - [✅ To-do](#--to-do)
 - [📋 Concept](#---concept)
 - [⚙️ Installation](#---installation)
-- [🧑🏼‍ Actor Diagram](#------actor-diagram)
-- [↔️ Interaction diagram](#---interaction-diagram)
-- [🌍 Design patterns](#---design-patterns)
-- [👍🏽 Best practices](#-----best-practices)
 - [🗃 Data](#---data)
   * [🐒 Color API](#---github-api)
     + [Endpoint(s)](#endpoint-s-)
@@ -26,9 +22,7 @@ https://project-tech-2021.herokuapp.com/login
 - [👯🏿‍ Features (+ wishlist)](#------features----wishlist-)
 - [🏫 Assignment](#---assignment)
   * [Learning goals](#learning-goals)
-  * [Week 1 - Hello API 🐒](#week-1---hello-api---)
-  * [Week 2 - Design and Refactor 🛠](#week-2---design-and-refactor---)
-  * [Week 3 - Wrapping up 🎁](#week-3---wrapping-up---)
+  * [Goals](#goals)
   * [Rubric](#rubric)
 - [ℹ️ Resources](#---resources)
   * [Credits](#credits)
@@ -43,8 +37,9 @@ https://project-tech-2021.herokuapp.com/login
 - [x] Add password hashing
 - [ ] Add matching feature
 
+
 ## 📋 Concept
-_What does your app do, what is the goal? (passing butter)_ 
+Users kunnen een account aanmaken, hiermee inloggen en op basis van hun favoriete kleur gematched worden met andere users.
 
 
 ## ⚙️ Installation
@@ -110,9 +105,6 @@ SESSION_SECRET=1
   }
 ```
 </details>
-
-## 📋 Concept
-Users kunnen een account aanmaken, hiermee inloggen en op basis van hun favoriete kleur gematched worden met andere users.
 
 
 ## 🗃 Data
