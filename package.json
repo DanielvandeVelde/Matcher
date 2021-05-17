@@ -1,16 +1,56 @@
 {
   "name": "matcher",
-  "description": "an app that helps people find their perfect match",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "heroku": "^7.2.0",
-    "mongodb": "^3.6.6"
+  "version": "1.0.0",
+  "description": "a dating app to establish the perfect match",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deannabosschert/Matcher.git"
   },
+  "keywords": [],
+  "author": "Deanna Bosschert",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deannabosschert/Matcher/issues"
+  },
+  "homepage": "https://github.com/deannabosschert/Matcher#readme",
+  "main": "server.js",
   "engines": {
-    "node": "^15.12.0"
+    "node": "^15.12.0",
+    "npm": "^7.6.3"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "node-sass": "^4.14.1",
+    "node-sass-glob-importer": "^5.3.2",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "connect-mongodb-session": "^2.4.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.2",
+    "express-liquid": "^0.2.6",
+    "express-session": "^1.17.1",
+    "fs": "^0.0.1-security",
+    "gyp": "^0.5.0",
+    "heroku": "^7.2.0",
+    "liquidjs": "^9.25.0",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.9.10",
+    "multer": "^1.4.2",
+    "node-fetch": "^2.6.0",
+    "node-gyp": "^3.8.0",
+    "rebuild": "^0.1.2"
   },
   "scripts": {
-    "start": "node index.js"
+    "dev:server": "nodemon server.js",
+    "dev:css": "sass --watch ./public/assets/scss:./public/",
+    "dev": "cross-env run-p dev:*",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
