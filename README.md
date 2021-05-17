@@ -2,7 +2,7 @@
 
 <kbd>![Site image](https://raw.githubusercontent.com/DanielvandeVelde/Matcher/master/docs/hero.png "Site image")</kbd>
 
-A live version of this fully responsive is running [here](https://be-matcher.herokuapp.com/)  
+A live version of this fully responsive application is running [here](https://be-matcher.herokuapp.com/)  
 I suggest checking out the [Wiki](https://github.com/DanielvandeVelde/Matcher/wiki) for information on the process.  
 
 ## ✅ To-do
