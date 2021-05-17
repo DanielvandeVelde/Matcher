@@ -35,28 +35,23 @@ MongoClient.connect(url, (err, client) => {
 
 mongoSession.on('error', (err) => { console.log('MongoDB-session error:' + err) })  // error'afhandeling' mongodb
 
-
-app.engine('liquid', engine.express()) // register liquid engine
-app.set('views', './pages') // specify the views directory
-app.set('view engine', 'liquid') // set liquid to default
-app.set('views', './views')
-app.use(express.static('public'))
-app.listen(port, () => {
-  console.log(`Running on port ${port}`)
-})
-app.use(session({
-  name: sessionID,
-  secret: process.env.SESSION_SECRET,
-  store: mongoSession,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    sameSite: true,
-    secure: false
-  }
-}))
-
 app
+  .engine('liquid', engine.express()) // register liquid engine
+  .set('views', './pages') // specify the views directory
+  .set('view engine', 'liquid') // set liquid to default
+  .set('views', './views')
+  .use(express.static('public'))
+  .use(session({
+    name: sessionID,
+    secret: process.env.SESSION_SECRET,
+    store: mongoSession,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      sameSite: true,
+      secure: false
+    }
+  }))
   .get('/', (req, res) => {
     return renderHome(req, res)
   })
@@ -83,6 +78,9 @@ app
   })
   .post('/remove', urlencodedParser, (req, res) => {
     removeProfile(req, res)
+  })
+  .listen(port, () => {
+    console.log(`Running on port ${port}`)
   })
 
 function renderHome(req, res) { // render homepage
