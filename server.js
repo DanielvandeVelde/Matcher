@@ -9,9 +9,11 @@ const engine = new Liquid({
   extname: '.liquid'})
 const bodyParser = require('body-parser')
 const multer = require('multer')
+const bcrypt = require('bcrypt')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const sessionID = 'sessionID'
 let users_db = null
+let saltRounds = 10
 
 require('dotenv').config()
 const url = process.env.DB_URL
@@ -126,7 +128,7 @@ function logOut(req, res) { //  remove session and clear sessionID
   })
 }
 
-function loginProfile(req, res) { // check if email+username exist in db, login
+function loginProfile(req, res) { // check if email+username exist in db, then login
   if (req.body.emailLogin && req.body.passwordLogin) {
     users_db.findOne({
       email: req.body.emailLogin.toLowerCase()
@@ -134,10 +136,23 @@ function loginProfile(req, res) { // check if email+username exist in db, login
       if (err) {
         console.log('MongoDB loginprofile findoneError:' + err)
       }
-      if (user && user.password === req.body.passwordLogin) {
-        req.session.sessionID = user._id
-        res.redirect('/profile')
-      } else {
+      if (user) {
+        console.log(user)
+        var password = req.body.passwordLogin
+        bcrypt.compare(password, user.hash, onverify)
+
+        function onverify(err, match) {
+          if (err) {
+            console.log(err)
+          } else if (match) {
+            req.session.sessionID = user._id
+            res.redirect('/profile')
+          } else {
+            res.status(401).send('Password incorrect')
+          }
+        }
+      }
+        else {
         res.render('pages/login', {
           data: req.body
         })
@@ -151,39 +166,48 @@ function loginProfile(req, res) { // check if email+username exist in db, login
 }
 
 function registerProfile(req, res) { // check if the username is already taken, then insert new profile into db
+  let password = req.body.passwordSignup
+
   users_db.findOne({
     username: req.body.userSignup
   }, (err, user) => {
     if (err) {
-      console.log('registerprofileerror')
-
       console.log('MongoDB registerprofile findone Error:' + err)
     }
     if (user) {
-      console.log('rp-user render login partial')
-
       res.render('pages/login', {
         data: req.body
       })
     } else {
-      const user = {
-        username: req.body.userSignup,
-        email: req.body.emailSignup.toLowerCase(),
-        password: req.body.passwordSignup,
-        description: '',
-        age: '',
-        location: '',
-        avatar: ''
-      }
+     
 
-      console.log(user)
-      users_db.insert([user], (err) => {
-        if (err) {
-          console.log('MongoDB registerprofie insertone Error:' + err)
-        } else {
-          res.render('pages/signup-completed', {
-            data: req.body
-          })
+      bcrypt.hash(password, saltRounds, (err, hash) => {
+        {
+          if (err) {
+            next(err)
+          } else {
+            const user = {
+              username: req.body.userSignup,
+              email: req.body.emailSignup.toLowerCase(),
+              hash: hash,
+              description: '',
+              age: '',
+              location: '',
+              avatar: ''
+            }
+
+            console.log(user)
+            users_db.insert([user], (err) => {
+              if (err) {
+                console.log('MongoDB registerprofie insertone Error:' + err)
+              } else {
+                res.render('pages/signup-completed', {
+                  data: req.body
+                })
+              }
+            })
+
+          }
         }
       })
     }
@@ -237,7 +261,7 @@ function editProfile(req, res) { // look up profile in MongoDB-db by _id and upd
           res.redirect('/login')
         }
       })
-    } else if (req.file) {
+    } else if (req.file) { // als er een foto wordt geupload, moet dit nog uitgevoerd worden
       const img = 'uploads/' + req.file.path.split('/').pop() // takes only the relative path out of the array
       users_db.updateMany({
         _id: req.session.sessionID
