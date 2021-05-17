@@ -18,8 +18,7 @@ const url = process.env.DB_URL
 const port = process.env.PORT || 3000
 const mongoSession = new MongoDBSession({
   uri: url,
-  collection: process.env.C_NAME
-})
+  collection: process.env.C_NAME })
 
 const upload = multer({ // verzorgt het storen van de geuploade afbeeldingen in de aangegeven folder
   storage: multer.diskStorage({
@@ -28,15 +27,18 @@ const upload = multer({ // verzorgt het storen van de geuploade afbeeldingen in 
     },
     filename: (req, file, data) => {
       data(null, Date.now() + '.jpg') // verander filename
-    }
-  })
-})
+    }})})
+
+MongoClient.connect(url, (err, client) => {
+  if (err) { console.log('MongoDB-client connect error:' + err) }
+  else { users_db = client.db(process.env.DB_NAME).collection('users')}})
+
+mongoSession.on('error', (err) => { console.log('MongoDB-session error:' + err) })  // error'afhandeling' mongodb
+
 
 app.engine('liquid', engine.express()) // register liquid engine
 app.set('views', './pages') // specify the views directory
 app.set('view engine', 'liquid') // set liquid to default
-
-
 app.set('views', './views')
 app.use(express.static('public'))
 app.listen(port, () => {
@@ -53,18 +55,6 @@ app.use(session({
     secure: false
   }
 }))
-
-MongoClient.connect(url, (err, client) => {
-  if (err) {
-    console.log('MongoDB-client connect error:' + err)
-  } else {
-    users_db = client.db(process.env.DB_NAME).collection('users')
-  }
-})
-
-mongoSession.on('error', (err) => { // error'afhandeling' mongodb
-  console.log('MongoDB-session error:' + err)
-})
 
 app
   .get('/', (req, res) => {
