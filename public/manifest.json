@@ -1,0 +1,68 @@
+{
+    "name": "Color Matcher",
+    "short_name": "Matcher",
+    "description": "An place to find others based on favorite colors",
+    "theme_color": "#8E8EFC",
+    "background_color": "#E6E6FA",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "screenshots": [ {
+      "src": "public/assets/img/screenshot_website.png",
+      "sizes": "3584x2094",
+      "type": "image/png"
+    }],
+    "icons": [
+      {
+        "src": "assets/img/icons/cat/icon.iconset/maskable_icon.png",
+        "sizes": "240x240",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "assets/img/icons/Favicons/favicon-32.png",
+        "sizes": "32x32",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/img/icons/Favicons/favicon-36.png",
+        "sizes": "36x36",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/img/icons/Favicons/favicon-48.png",
+        "sizes": "48x48",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/img/icons/Favicons/favicon-57.png",
+        "sizes": "57x57",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/img/icons/Favicons/favicon-60.png",
+        "sizes": "60x60",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/img/icons/Favicons/favicon-72.png",
+        "sizes": "72x72",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/img/icons/Favicons/favicon-75.png",
+        "sizes": "76x76",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/img/icons/Favicons/favicon-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "assets/img/icons/cat/icon.iconset/icon_512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
