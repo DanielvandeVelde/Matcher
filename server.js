@@ -3,39 +3,22 @@ const app = express()
 const session = require('express-session')
 const MongoDBSession = require('connect-mongodb-session')(session)
 const MongoClient = require('mongodb').MongoClient
-var {
-  Liquid
-} = require('liquidjs')
-var engine = new Liquid({
+const { Liquid } = require('liquidjs')
+const engine = new Liquid({
   root: ['views/layouts', 'views/pages/'],
-  extname: '.liquid'
-})
-
-// register liquid engine
-app.engine('liquid', engine.express())
-app.set('views', './pages') // specify the views directory
-app.set('view engine', 'liquid') // set liquid to default
-
-
+  extname: '.liquid'})
 const bodyParser = require('body-parser')
 const multer = require('multer')
-const urlencodedParser = bodyParser.urlencoded({
-  extended: false
-})
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const sessionID = 'sessionID'
+let users_db = null
 
 require('dotenv').config()
-
-const sessionID = 'sessionID'
 const url = process.env.DB_URL
 const port = process.env.PORT || 3000
-let users_db = null
 const mongoSession = new MongoDBSession({
   uri: url,
   collection: process.env.C_NAME
-})
-
-mongoSession.on('error', (err) => {
-  console.log('MongoDB-session error:' + err)
 })
 
 const upload = multer({ // verzorgt het storen van de geuploade afbeeldingen in de aangegeven folder
@@ -48,6 +31,11 @@ const upload = multer({ // verzorgt het storen van de geuploade afbeeldingen in 
     }
   })
 })
+
+app.engine('liquid', engine.express()) // register liquid engine
+app.set('views', './pages') // specify the views directory
+app.set('view engine', 'liquid') // set liquid to default
+
 
 app.set('views', './views')
 app.use(express.static('public'))
@@ -74,17 +62,55 @@ MongoClient.connect(url, (err, client) => {
   }
 })
 
-function checkSession(req, res) {
-  return new Promise((resolve, reject) => {
-    if (req.session.sessionID) {
-      resolve('true')
-    } else {
-      resolve('false')
-    }
+mongoSession.on('error', (err) => { // error'afhandeling' mongodb
+  console.log('MongoDB-session error:' + err)
+})
+
+app
+  .get('/', (req, res) => {
+    return renderHome(req, res)
   })
+  .get('/login', (req, res) => {
+    redirectUrl(req, res, 'login')
+  })
+  .post('/logout', (req, res) => {
+    redirectUrl(req, res, 'logout')
+  })
+  .get('/profile', (req, res) => {
+    redirectUrl(req, res, 'profile')
+  })
+  .get('/remove', urlencodedParser, (req, res) => { // wanneer je op de url /remove zit, render dan de remove-functie
+    res.render('pages/remove')
+  })
+  .post('/login', urlencodedParser, (req, res) => {
+    loginProfile(req, res)
+  })
+  .post('/signup', urlencodedParser, (req, res) => {
+    registerProfile(req, res)
+  })
+  .post('/profile', upload.single('editImage'), urlencodedParser, (req, res) => {
+    editProfile(req, res)
+  })
+  .post('/remove', urlencodedParser, (req, res) => {
+    removeProfile(req, res)
+  })
+
+function renderHome(req, res) { // render homepage
+  if (!req.session.sessionID) {
+    res.redirect('/login')
+  } else {
+    res.render('pages/home', {
+      title: 'Homepage'
+    })
+
+    // res.render('pages/home', {
+    //   title: 'Homepage',
+    //   matches: userData.matches
+    // })
+  }
 }
 
-function redirectUrl(req, res, action) {
+function redirectUrl(req, res, action) { // check session, then redirect based on y/n logged in
   try {
     checkSession(req, res).then(session => {
       if (session == 'true' && action == 'login') {
@@ -106,49 +132,16 @@ function redirectUrl(req, res, action) {
   }
 }
 
-app
-.get('/', (req, res) => {
-  return renderHome(req, res)
-})
-.get('/login', (req, res) => {
-  redirectUrl(req, res, 'login')
-})
-.post('/logout', (req, res) => {
-  redirectUrl(req, res, 'logout')
-})
-.get('/profile', (req, res) => {
-  redirectUrl(req, res, 'profile')
-})
-.get('/remove', urlencodedParser, (req, res) => { // wanneer je op de url /remove zit, render dan de remove-functie
-  res.render('pages/remove')
-})
-.post('/login', urlencodedParser, (req, res) => {
-  loginProfile(req, res)
-})
-.post('/signup', urlencodedParser, (req, res) => {
-  registerProfile(req, res)
-})
-.post('/profile', upload.single('editImage'), urlencodedParser, (req, res) => {
-  editProfile(req, res)
-})
-.post('/remove', urlencodedParser, (req, res) => {
-  removeProfile(req, res)
-})
-
-function renderHome(req, res) { // render homepage
-  if (!req.session.sessionID) {
-    res.redirect('/login')
-  } else {
-    res.render('pages/home', {
-      title: 'Homepage'
-    })
-
-    // res.render('pages/home', {
-    //   title: 'Homepage',
-    //   matches: userData.matches
-    // })
-  }
+function checkSession(req, res) { // check for active session
+  return new Promise((resolve, reject) => {
+    if (req.session.sessionID) {
+      resolve('true')
+    } else {
+      resolve('false')
+    }
+  })
 }
+
 
 function renderProfile(req, res) { // find user in db and render profile page with data
   users_db.findOne({
