@@ -1,0 +1,36 @@
+{% layout "base.liquid" %}
+{% block content %}
+<div class="profile">
+    <div class="login">
+        <div class="login_card">
+            <h2>Profiel</h2>
+            <form class="profile_edit_form" id="edit_profile" action="/profile" method="POST" enctype="multipart/form-data">
+                <div class="profile_avatar" style="background-image: url('{{ userInfo.avatar }}');"></div>
+                <label class="profile_avatar_label" for="editImage">Profielfoto</label>
+                <input class="profile_editavatar" type="file" name="editImage" accept="image/*">
+                <span class="sign-up-failed">De gebruikersnaam <span class="takenUsername">{{ data.editUser }}</span> is al bezet, kies een andere.</span>
+                <label for="editUser">Gebruikersnaam</label>
+                <p>{{ userInfo.username }}</p>
+                <input class="gebruikersnaam no-err" type="text" name="editUser" id="editUser" value="{{ userInfo.username }}">
+                <label for="editAge">Leeftijd</label>
+                <p>{{ userInfo.age }}</p>
+                <input class="leeftijd no-err" type="text" name="editAge" id="editAge" value="{{ userInfo.age }}">
+                <label for="editLocation">Locatie</label>
+                <p>{{ userInfo.location }}</p>
+                <input class="locatie no-err" type="text" name="editLocation" id="editLocation" value="{{ userInfo.location }}">
+                <label for="editDescription">Beschrijving</label>
+                <p>{{ userInfo.description }}</p>
+                <textarea name="editDescription" id="editDescription" cols="30" rows="10">{{ userInfo.description }}</textarea>
+            <button class="profile_save">Opslaan</button>
+            </form>
+            <button class="profile_button">Bewerk profiel</button>
+            <form id="logout_button" action="/logout" method="POST">
+                <button>Uitloggen</button>
+            </form>
+            <a class="removebutton" href="/remove">Account verwijderen</a>
+        </div>
+    </div>
+</div>
+
+<script src="editProfile.js"></script>
+{% endblock %}
