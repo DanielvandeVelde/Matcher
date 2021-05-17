@@ -83,14 +83,14 @@ function redirectUrl(req, res, action) { // check session, then redirect based o
     checkSession(req, res).then(session => {
       if (session == 'true' && action == 'login') {
         res.redirect('/profile')
-      } else if (action == 'login') {
-        res.render('pages/login', {
-          title: 'Login page'
-        })
       } else if (session == 'true' && action == 'logout') {
         logOut(req, res)
       } else if (session == 'true' && action == 'profile') {
         renderProfile(req, res)
+      } else if (action == 'login') {
+        res.render('pages/login', {
+          title: 'Login page'
+        })
       } else {
         res.redirect('/login')
       }
