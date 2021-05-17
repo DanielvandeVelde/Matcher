@@ -77,15 +77,10 @@ MongoClient.connect(url, (err, client) => {
 // REDIRECTION FUNCTIONALITY BASED ON SESSION (whether the user is logged in)
 const userRedirect = (req, res, next, toUrl) => { // mss een try/catch gebruiken?
   if (!req.session.sessionID && toUrl == 'login') {
-    console.log(' redirect naar /login')
     res.redirect('/{toUrl}') // als er geen actieve sessionID is en de user op /login zit, redirect dan naar /login
   } else if (req.session.sessionID && toUrl == 'profile') {
-    console.log(' redirect naar /profile')
-
     res.redirect('/{toUrl}') // als er een actieve sessionID is en de user dus is ingelogd, redirect dan naar /profile
   } else {
-    console.log(' next!!')
-
     next() // voer functie uit die hierna staat aangegeven
   }
 }
@@ -108,33 +103,21 @@ function checkSession(req, res) {
 function redirectUrl(req, res, action) {
   try {
     checkSession(req, res).then(session => {
-      console.log('actie is: ' + action)
-
-
       if (session == 'true' && action == 'login') {
-        console.log('er is een redirect')
         res.redirect('/profile')
       } else if (action == 'login') {
         res.render('pages/login', {
           title: 'Login page'
         })
       } else if (session == 'true' && action == 'logout') {
-        console.log('we gaan uitloggen')
         logOut(req, res)
       } else if (action == 'logout') {
         res.redirect('/login')
       } else if (session == 'true' && action == 'profile') {
-        console.log('zoek progiel')
         renderProfile(req, res)
       } else if (action == 'profile') {
         res.redirect('/login')
       }
-      // else {
-      //   console.log('render login pagina')
-      //   return res.render(`pages/${other}/${other}`, {
-      //     title: `${other} page`
-      //   })
-      // }
     })
   } catch (err) {
     console.error(err)
@@ -184,11 +167,7 @@ function renderRemove(req, res) { // wanneer je op de url /remove zit, render da
 }
 
 function loginProfile(req, res) {
-  console.log('post naar /login')
-
   if (req.body.emailLogin && req.body.passwordLogin) {
-    console.log('findOne')
-
     users_db.findOne({
       email: req.body.emailLogin.toLowerCase()
     }, (err, user) => {
@@ -199,16 +178,12 @@ function loginProfile(req, res) {
         req.session.sessionID = user._id
         res.redirect('/profile')
       } else {
-        console.log('TERUG NAAR LOGIN NR1')
         res.render('pages/login', {
           data: req.body
         })
       }
     })
   } else {
-    console.log('render login partial met reqbody asl data')
-    console.log('TERUG NAAR LOGIN NR2')
-
     res.render('pages/login', {
       data: req.body
     })
@@ -216,7 +191,6 @@ function loginProfile(req, res) {
 }
 
 function registerProfile(req, res) {
-  console.log('registerprofile')
   users_db.findOne({
     username: req.body.userSignup
   }, (err, user) => {
@@ -243,7 +217,6 @@ function registerProfile(req, res) {
       }
 
       console.log(user)
-
       users_db.insert([user], (err) => {
         if (err) {
           console.log('MongoDB registerprofie insertone Error:' + err)
@@ -258,7 +231,6 @@ function registerProfile(req, res) {
 }
 
 function renderProfile(req, res) {
-  console.log('functie van render profile')
   users_db.findOne({
     _id: req.session.sessionID
   }, (err, user) => {
@@ -373,7 +345,6 @@ function removeProfile(req, res) { // look up profile in MongoDB-db by id
           res.redirect('/login')
         })
       } else {
-        console.log('password incorrect')
         res.render('pages/remove', {
           data: 'Password incorrect.'
         })
