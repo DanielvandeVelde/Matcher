@@ -111,11 +111,9 @@ function redirectUrl(req, res, action) {
         })
       } else if (session == 'true' && action == 'logout') {
         logOut(req, res)
-      } else if (action == 'logout') {
-        res.redirect('/login')
       } else if (session == 'true' && action == 'profile') {
         renderProfile(req, res)
-      } else if (action == 'profile') {
+      } else {
         res.redirect('/login')
       }
     })
