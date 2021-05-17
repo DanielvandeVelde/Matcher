@@ -19,7 +19,6 @@ const port = process.env.PORT || 3000
 const mongoSession = new MongoDBSession({
   uri: url,
   collection: process.env.C_NAME })
-
 const upload = multer({ // verzorgt het storen van de geuploade afbeeldingen in de aangegeven folder
   storage: multer.diskStorage({
     destination: (req, file, data) => {
@@ -32,7 +31,6 @@ const upload = multer({ // verzorgt het storen van de geuploade afbeeldingen in 
 MongoClient.connect(url, (err, client) => {
   if (err) { console.log('MongoDB-client connect error:' + err) }
   else { users_db = client.db(process.env.DB_NAME).collection('users')}})
-
 mongoSession.on('error', (err) => { console.log('MongoDB-session error:' + err) })  // error'afhandeling' mongodb
 
 app
@@ -52,7 +50,7 @@ app
       secure: false
     }
   }))
-  .get('/', (req, res) => { return renderHome(req, res) })   // wanneer je op de url /${url}} zit, voer dan deze functie uit of render dan deze pagina
+  .get('/', (req, res) => {  redirectUrl(req, res, 'home') })   // wanneer je op de url /${url}} zit, voer dan deze functie uit of render dan deze pagina
   .get('/login', (req, res) => { redirectUrl(req, res, 'login') })
   .post('/logout', (req, res) => { redirectUrl(req, res, 'logout') })
   .get('/profile', (req, res) => { redirectUrl(req, res, 'profile') })
@@ -63,22 +61,7 @@ app
   .post('/remove', urlencodedParser, (req, res) => { removeProfile(req, res) })
   .listen(port, () => { console.log(`Running on port ${port}`) }) // specificeer poort
 
-function renderHome(req, res) { // render homepage
-  if (!req.session.sessionID) {
-    res.redirect('/login')
-  } else {
-    res.render('pages/home', {
-      title: 'Homepage'
-    })
-
-    // res.render('pages/home', {
-    //   title: 'Homepage',
-    //   matches: userData.matches
-    // })
-  }
-}
-
-function redirectUrl(req, res, action) { // check session, then redirect based on y/n logged in
+function redirectUrl(req, res, action) { // check session, then redirect or render based on y/n logged in
   try {
     checkSession(req, res).then(session => {
       if (session == 'true' && action == 'login') {
@@ -87,6 +70,10 @@ function redirectUrl(req, res, action) { // check session, then redirect based o
         logOut(req, res)
       } else if (session == 'true' && action == 'profile') {
         renderProfile(req, res)
+      } else if (session == 'true' && action == 'home') {
+        res.render('pages/home', {
+          title: 'Homepage'
+        })
       } else if (action == 'login') {
         res.render('pages/login', {
           title: 'Login page'
