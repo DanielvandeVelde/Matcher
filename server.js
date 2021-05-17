@@ -52,36 +52,16 @@ app
       secure: false
     }
   }))
-  .get('/', (req, res) => {
-    return renderHome(req, res)
-  })
-  .get('/login', (req, res) => {
-    redirectUrl(req, res, 'login')
-  })
-  .post('/logout', (req, res) => {
-    redirectUrl(req, res, 'logout')
-  })
-  .get('/profile', (req, res) => {
-    redirectUrl(req, res, 'profile')
-  })
-  .get('/remove', urlencodedParser, (req, res) => { // wanneer je op de url /remove zit, render dan de remove-functie
-    res.render('pages/remove')
-  })
-  .post('/login', urlencodedParser, (req, res) => {
-    loginProfile(req, res)
-  })
-  .post('/signup', urlencodedParser, (req, res) => {
-    registerProfile(req, res)
-  })
-  .post('/profile', upload.single('editImage'), urlencodedParser, (req, res) => {
-    editProfile(req, res)
-  })
-  .post('/remove', urlencodedParser, (req, res) => {
-    removeProfile(req, res)
-  })
-  .listen(port, () => {
-    console.log(`Running on port ${port}`)
-  })
+  .get('/', (req, res) => { return renderHome(req, res) })   // wanneer je op de url /${url}} zit, voer dan deze functie uit of render dan deze pagina
+  .get('/login', (req, res) => { redirectUrl(req, res, 'login') })
+  .post('/logout', (req, res) => { redirectUrl(req, res, 'logout') })
+  .get('/profile', (req, res) => { redirectUrl(req, res, 'profile') })
+  .get('/remove', urlencodedParser, (req, res) => { res.render('pages/remove')})
+  .post('/login', urlencodedParser, (req, res) => { loginProfile(req, res) }) // wanneer er iets wordt gepost op deze url, voer dan deze functie uit
+  .post('/signup', urlencodedParser, (req, res) => { registerProfile(req, res) })
+  .post('/profile', upload.single('editImage'), urlencodedParser, (req, res) => { editProfile(req, res) })
+  .post('/remove', urlencodedParser, (req, res) => { removeProfile(req, res) })
+  .listen(port, () => { console.log(`Running on port ${port}`) }) // specificeer poort
 
 function renderHome(req, res) { // render homepage
   if (!req.session.sessionID) {
@@ -129,7 +109,6 @@ function checkSession(req, res) { // check for active session
     }
   })
 }
-
 
 function renderProfile(req, res) { // find user in db and render profile page with data
   users_db.findOne({
