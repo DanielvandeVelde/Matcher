@@ -74,22 +74,6 @@ MongoClient.connect(url, (err, client) => {
   }
 })
 
-// REDIRECTION FUNCTIONALITY BASED ON SESSION (whether the user is logged in)
-const userRedirect = (req, res, next, toUrl) => { // mss een try/catch gebruiken?
-  if (!req.session.sessionID && toUrl == 'login') {
-    res.redirect('/{toUrl}') // als er geen actieve sessionID is en de user op /login zit, redirect dan naar /login
-  } else if (req.session.sessionID && toUrl == 'profile') {
-    res.redirect('/{toUrl}') // als er een actieve sessionID is en de user dus is ingelogd, redirect dan naar /profile
-  } else {
-    next() // voer functie uit die hierna staat aangegeven
-  }
-}
-
-// app.get('/', (req, res) => { // tried refactoring all of this into seperate functions but that didn't work due to the passing of the request/response object
-//   console.log('render home')
-//   renderHome(req, res)
-// })
-
 function checkSession(req, res) {
   return new Promise((resolve, reject) => {
     if (req.session.sessionID) {
