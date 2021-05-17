@@ -298,11 +298,9 @@ function removeClass(classname, classToggle) {
 }
 
 function replaceClass(element, before, after) {
-    console.log('replace class')
     document.querySelector(`${element}`).nextElementSibling.classList.replace(`${before}`, `${after}`)
 }
 
 function insertHTML(element, content) {
-    console.log('insert the html')
     document.querySelector(`${element}`).nextElementSibling.innerHTML = `${content}`
 }
