@@ -1,0 +1,56 @@
+{% layout "base.liquid" %}
+{% block content %}
+
+<div class="login">
+    <div class="login_card">
+        <h2>Inloggen</h2>
+        <span class="loginFailed">{{ data.emailLogin }}</span>
+        <form id="login_form" action="/login" method="POST">
+            <span class="login-failed">Je e-mailadres of wachtwoord is incorrect.</span>
+            <span id="login-err-message" class="no-err-message">Controleer of alle velden correct ingevuld zijn.</span>
+            <label for="emailLogin">E-mailadres</label>
+            <input class="no-err" type="text" name="emailLogin" id="emailLogin" placeholder="E-mail adress"
+                value="{{ data.emailLogin }}">
+            <span class="no-err-message"></span>
+            <label for="passwordLogin">Wachtwoord</label>
+            <input class="no-err" type="password" name="passwordLogin" id="passwordLogin" placeholder="Password">
+            <span class="no-err-message"></span>
+            <button form="login_form" type="submit" class="inlogbutton">
+                Inloggen
+            </button>
+            <h3 class="registratie">Nog geen account? <span class="signuptitle">Meld je dan hier aan:</span></h3>
+            <button type="button" class="sign-up-button">
+                Registreren
+            </button>
+        </form>
+    </div>
+    <div class="sign-up_card sign-up_card-no-js">
+        <h2>Registreren</h2>
+        <span class="sign-up_card_close">x</span>
+        <form id="sign-up_form" action="/signup" method="POST">
+            <span class="sign-up-failed">De gebruikersnaam <span class="takenUsername">{{ data.userSignup }}</span> is
+                al bezet, kies svp een andere.</span>
+            <span id="form-err-message" class="no-err-message">Controleer of alle velden correct ingevuld zijn.</span>
+            <label for="userSignup">Gebruikersnaam <span>*</span></label>
+            <input class="no-err" type="text" name="userSignup" id="userSignup" placeholder="Username">
+            <span class="no-err-message"></span>
+            <label for="emailSignup">E-mailadres <span>*</span></label>
+            <input class="no-err" type="text" name="emailSignup" id="emailSignup" placeholder="E-mail adress">
+            <span class="no-err-message"></span>
+            <label for="passwordSignup">Wachtwoord <span>*</span></label>
+            <input class="no-err" type="password" name="passwordSignup" id="passwordSignup" placeholder="Password">
+            <span class="no-err-message"></span>
+            <label for="passwordSignupRepeat">Herhaal wachtwoord <span>*</span></label>
+            <input class="no-err" type="password" name="passwordSignupRepeat" id="passwordSignupRepeat"
+                placeholder="Repeat password">
+            <span class="no-err-message"></span>
+            <button class="registreerbutton" form="sign-up_form" type="submit" value="submit">
+                Registreer
+            </button>
+        </form>
+    </div>
+
+</div>
+
+<script src="formValidator.js"></script>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% layout "base.liquid" %}
+{% block content %}
+<div class="login">
+    <div class="login__background"></div>
+    <div class="login__card">
+        <h2>Weet je het zeker?</h2>
+        <span class="form-err-message">{{ data }}</span>
+        <h3>Om te bevestigen dat je je account wil verwijderen, typ dan hieronder je wachtwoord in (<span>dit kan niet ongedaan worden gemaakt</span>):</h3>
+        <form id="" action="/remove" method="POST">
+            <label for="removePassword">Password</label>
+            <input class="no-err" type="password" name="removePassword" id="removePassword" placeholder="Password">
+            <button>Verwijder account</button>
+        </form>
+        <a href="/profile"><button>Cancel</button></a>
+    </div>
+</div>
+{% endblock %}
