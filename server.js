@@ -11,9 +11,6 @@ var engine = new Liquid({
   extname: '.liquid'
 })
 
-
-
-
 // register liquid engine
 app.engine('liquid', engine.express())
 app.set('views', './pages') // specify the views directory
@@ -41,13 +38,13 @@ mongoSession.on('error', (err) => {
   console.log('MongoDB-session error:' + err)
 })
 
-const upload = multer({
+const upload = multer({ // verzorgt het storen van de geuploade afbeeldingen in de aangegeven folder
   storage: multer.diskStorage({
     destination: (req, file, data) => {
       data(null, 'public/uploads')
     },
     filename: (req, file, data) => {
-      data(null, Date.now() + '.jpg')
+      data(null, Date.now() + '.jpg') // verander filename
     }
   })
 })
@@ -144,54 +141,32 @@ function redirectUrl(req, res, action) {
   }
 }
 
-
-
-
-app.get('/', (req, res) => {
+app
+.get('/', (req, res) => {
   return renderHome(req, res)
 })
-
-
-app.get('/login', (req, res) => {
+.get('/login', (req, res) => {
   redirectUrl(req, res, 'login')
 })
-
-// LOGOUT
-app.post('/logout', (req, res) => {
+.post('/logout', (req, res) => {
   redirectUrl(req, res, 'logout')
 })
-
-
-// SHOW PROFILE
-app.get('/profile', (req, res) => {
+.get('/profile', (req, res) => {
   redirectUrl(req, res, 'profile')
 })
-
-
-
-
-app.get('/remove', urlencodedParser, (req, res) => { // wanneer je op de url /remove zit, render dan de remove-functie
+.get('/remove', urlencodedParser, (req, res) => { // wanneer je op de url /remove zit, render dan de remove-functie
   renderRemove(req, res)
 })
-
-// FUNCTIONS (could've been refactored to app . . .  etc but this is better for readability I figured)
-// LOGIN
-app.post('/login', urlencodedParser, (req, res) => {
+.post('/login', urlencodedParser, (req, res) => {
   loginProfile(req, res)
 })
-
-// REGISTER
-app.post('/signup', urlencodedParser, (req, res) => {
+.post('/signup', urlencodedParser, (req, res) => {
   registerProfile(req, res)
 })
-
-// EDIT PROFILE
-app.post('/profile', upload.single('editImage'), urlencodedParser, (req, res) => {
+.post('/profile', upload.single('editImage'), urlencodedParser, (req, res) => {
   editProfile(req, res)
 })
-
-// REMOVE PROFILE
-app.post('/remove', urlencodedParser, (req, res) => {
+.post('/remove', urlencodedParser, (req, res) => {
   removeProfile(req, res)
 })
 
@@ -240,7 +215,6 @@ function loginProfile(req, res) {
   }
 }
 
-
 function registerProfile(req, res) {
   console.log('registerprofile')
   users_db.findOne({
@@ -283,7 +257,6 @@ function registerProfile(req, res) {
   })
 }
 
-
 function renderProfile(req, res) {
   console.log('functie van render profile')
   users_db.findOne({
@@ -302,7 +275,6 @@ function renderProfile(req, res) {
     }
   })
 }
-
 
 function editProfile(req, res) {
   users_db.findOne({
