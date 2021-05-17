@@ -9,9 +9,11 @@ const engine = new Liquid({
   extname: '.liquid'})
 const bodyParser = require('body-parser')
 const multer = require('multer')
+const bcrypt = require('bcrypt')
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 const sessionID = 'sessionID'
 let users_db = null
+let saltRounds = 10
 
 require('dotenv').config()
 const url = process.env.DB_URL
@@ -155,13 +157,9 @@ function registerProfile(req, res) { // check if the username is already taken, 
     username: req.body.userSignup
   }, (err, user) => {
     if (err) {
-      console.log('registerprofileerror')
-
       console.log('MongoDB registerprofile findone Error:' + err)
     }
     if (user) {
-      console.log('rp-user render login partial')
-
       res.render('pages/login', {
         data: req.body
       })
