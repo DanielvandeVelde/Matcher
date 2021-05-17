@@ -193,7 +193,7 @@ header {
       margin: 1rem 0 0.5rem;
     }
 
-    a {
+    button, a {
       background-color: $sweetpink;
       color: white;
       position: absolute;
@@ -208,6 +208,8 @@ header {
       span {
         color: black;
       }
+
+    
     }
   }
 
@@ -235,7 +237,7 @@ header {
           border-bottom: 2px solid black;
         }
 
-        a {
+        button, a {
           text-decoration: none;
           font-weight: 600;
           color: $dark;
@@ -243,6 +245,18 @@ header {
           text-align: center;
           padding: 0.1rem 0.5rem;
           line-height: 1.25;
+        }
+        form {
+          margin: 0;
+          padding: 0;
+  
+          button {
+            height: inherit;
+            background-color: inherit;
+            background-image: none;
+            box-shadow: inherit;
+            width: inherit;
+          }
         }
       }
     }
