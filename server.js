@@ -138,7 +138,7 @@ app
   redirectUrl(req, res, 'profile')
 })
 .get('/remove', urlencodedParser, (req, res) => { // wanneer je op de url /remove zit, render dan de remove-functie
-  renderRemove(req, res)
+  res.render('pages/remove')
 })
 .post('/login', urlencodedParser, (req, res) => {
   loginProfile(req, res)
@@ -153,20 +153,51 @@ app
   removeProfile(req, res)
 })
 
-
-function renderHome(req, res) {
+function renderHome(req, res) { // render homepage
   if (!req.session.sessionID) {
     res.redirect('/login')
   } else {
-    res.redirect('/profile')
+    res.render('pages/home', {
+      title: 'Homepage'
+    })
+
+    // res.render('pages/home', {
+    //   title: 'Homepage',
+    //   matches: userData.matches
+    // })
   }
 }
 
-function renderRemove(req, res) { // wanneer je op de url /remove zit, render dan de remove-functie
-  res.render('pages/remove')
+function renderProfile(req, res) { // find user in db and render profile page with data
+  users_db.findOne({
+    _id: req.session.sessionID
+  }, (err, user) => {
+    if (err) {
+      console.log('MongoDB renderprofile Error:' + err)
+    }
+    if (user) {
+      res.render('pages/profile', {
+        'userInfo': user,
+        title: 'Profile'
+      })
+    } else {
+      console.log('Client ID not found')
+    }
+  })
 }
 
-function loginProfile(req, res) {
+function logOut(req, res) { //  remove session and clear sessionID
+  req.session.destroy((err) => {
+    if (err) {
+      res.redirect('/profile')
+    }
+
+    res.clearCookie(sessionID)
+    res.redirect('/login')
+  })
+}
+
+function loginProfile(req, res) { // check if email+username exist in db, login
   if (req.body.emailLogin && req.body.passwordLogin) {
     users_db.findOne({
       email: req.body.emailLogin.toLowerCase()
@@ -190,7 +221,7 @@ function loginProfile(req, res) {
   }
 }
 
-function registerProfile(req, res) {
+function registerProfile(req, res) { // check if the username is already taken, then insert new profile into db
   users_db.findOne({
     username: req.body.userSignup
   }, (err, user) => {
@@ -230,25 +261,7 @@ function registerProfile(req, res) {
   })
 }
 
-function renderProfile(req, res) {
-  users_db.findOne({
-    _id: req.session.sessionID
-  }, (err, user) => {
-    if (err) {
-      console.log('MongoDB renderprofile Error:' + err)
-    }
-    if (user) {
-      res.render('pages/profile', {
-        'userInfo': user,
-        title: 'Profile'
-      })
-    } else {
-      console.log('Client ID not found')
-    }
-  })
-}
-
-function editProfile(req, res) {
+function editProfile(req, res) { // look up profile in MongoDB-db by _id and update entry
   users_db.findOne({
     _id: req.session.sessionID
   }, (err, user) => {
@@ -324,7 +337,7 @@ function editProfile(req, res) {
   })
 }
 
-function removeProfile(req, res) { // look up profile in MongoDB-db by id
+function removeProfile(req, res) { // look up profile in MongoDB-db by id and delete entry
   users_db.findOne({
     _id: req.session.sessionID
   }, (err, user) => {
@@ -353,16 +366,5 @@ function removeProfile(req, res) { // look up profile in MongoDB-db by id
     } else {
       res.redirect('/')
     }
-  })
-}
-
-function logOut(req, res) {
-  req.session.destroy((err) => {
-    if (err) {
-      res.redirect('/profile')
-    }
-
-    res.clearCookie(sessionID)
-    res.redirect('/login')
   })
 }
