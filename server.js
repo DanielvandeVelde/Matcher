@@ -30,7 +30,7 @@ require('dotenv').config()
 
 const sessionID = 'sessionID'
 const url = process.env.DB_URL
-const port = 3000
+const port = process.env.PORT || 3000
 let users_db = null
 const mongoSession = new MongoDBSession({
   uri: url,
