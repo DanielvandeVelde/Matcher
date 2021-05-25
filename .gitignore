@@ -1,9 +1,4 @@
 .DS_Store
 node_modules
 .env
-scripts
-fonts
-old_views
-server copy.js
-server copy 2.js
-main.js
+private
