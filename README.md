@@ -221,8 +221,8 @@ Authors:
 License by
 [MIT](https://github.com/deannabosschert/project/blob/master/LICENSE)
 
-<<<<<<< HEAD
-=======
+---
+
 <kbd>![Site image](https://raw.githubusercontent.com/DanielvandeVelde/Matcher/master/docs/hero.png "Site image")</kbd>
 
 A live version of this fully responsive application is running [here](https://be-matcher.herokuapp.com/)  
@@ -286,5 +286,3 @@ Author:
 
 License by
 [MIT](https://github.com/deannabosschert/project/blob/master/LICENSE)
-
->>>>>>> ec2ebb4e45205c8cb4ca5d015fda617c1d244a00
