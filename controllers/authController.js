@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
-const passport = require("passport");
-const User = require("../models/user.js");
-const userController = {};
+const mongoose = require("mongoose")
+const passport = require("passport")
+const User = require("../models/user.js")
+const userController = {}
 
 userController.home = (req, res) => {
   if (!req.user) {
-    return res.render("home");
+    return res.render("home")
   }
 
   const request = {
@@ -20,22 +20,26 @@ userController.home = (req, res) => {
     },
     username: { $ne: req.user.username },
     looking: { $in: [req.user.gender, "No preference"] },
-  };
+  }
 
   //If no preference, gender query is not needed
   if (req.user.looking !== "No preference") {
-    request["gender"] = req.user.looking;
+    request["gender"] = req.user.looking
   }
 
   User.find(request).exec((err, data) => {
-    const content = [req.user].concat(data);
-    return res.render("overview", { user: req.user, content: content });
-  });
-};
+    const content = [req.user].concat(data)
+    return res.render("overview", { user: req.user, content: content })
+  })
+}
+
+userController.offline = (req, res) => {
+  res.render("offline")
+}
 
 userController.register = (req, res) => {
-  res.render("register");
-};
+  res.render("register")
+}
 
 userController.doRegister = (req, res) => {
   User.register(
@@ -53,69 +57,67 @@ userController.doRegister = (req, res) => {
       likes: [],
     }),
     req.body.password,
-    (err) => {
+    err => {
       if (err) {
-        console.log(err);
-        return res.render("register", { err: err });
+        console.log(err)
+        return res.render("register", { err: err })
       }
 
       passport.authenticate("local")(req, res, () => {
-        res.redirect("/");
-      });
+        res.redirect("/")
+      })
     }
-  );
-};
+  )
+}
 
 userController.login = (req, res) => {
-  res.render("login");
-};
+  res.render("login")
+}
 
 userController.doLogin = (req, res) => {
   passport.authenticate("local")(req, res, () => {
-    res.redirect("/");
-  });
-};
+    res.redirect("/")
+  })
+}
 
 userController.logout = async (req, res) => {
-  req.logout();
-  req.session.destroy();
-  res.redirect("/");
-};
+  req.logout()
+  req.session.destroy()
+  res.redirect("/")
+}
 
 userController.profile = (req, res) => {
   User.findOne({ username: req.params.username }, (err, profile) => {
     if (err) {
-      return res.redirect("/");
+      return res.redirect("/")
     }
 
     const data = {
       profile: profile,
       user: req.user,
-    };
-
-    if (req.user) {
-      data["owner"] = req.params.username === req.user.username;
-      data["likes"] = req.user.likes.filter(
-        (like) => like === req.params.username
-      );
-      data["liked"] = profile.likes.filter(
-        (like) => like === req.user.username
-      );
     }
 
-    return res.render("profile", data);
-  });
-};
+    if (req.user) {
+      data["owner"] = req.params.username === req.user.username
+      data["likes"] = req.user.likes.filter(
+        like => like === req.params.username
+      )
+      data["liked"] = profile.likes.filter(like => like === req.user.username)
+    }
+
+    return res.render("profile", data)
+  })
+}
 
 userController.editProfile = (req, res) => {
-  let userProfile = false;
-  let lng;
-  let lat;
+  let userProfile = false
+  let lng
+  let lat
 
   if (req.user) {
-    userProfile = req.params.username === req.user.username;
-    lng = req.user.loc.coordinates[0];
-    lat = req.user.loc.coordinates[1];
+    userProfile = req.params.username === req.user.username
+    lng = req.user.loc.coordinates[0]
+    lat = req.user.loc.coordinates[1]
   }
 
   if (userProfile) {
@@ -123,11 +125,11 @@ userController.editProfile = (req, res) => {
       user: req.user,
       lng: lng,
       lat: lat,
-    });
+    })
   } else {
-    res.redirect("/profile/" + req.params.username);
+    res.redirect("/profile/" + req.params.username)
   }
-};
+}
 
 userController.updateProfile = (req, res) => {
   if (req.user) {
@@ -141,54 +143,54 @@ userController.updateProfile = (req, res) => {
         type: "Point",
         coordinates: [Number(req.body.lng), Number(req.body.lat)],
       },
-    };
-    const filter = { username: req.user.username };
+    }
+    const filter = { username: req.user.username }
     User.findOneAndUpdate(filter, update, (err, result) => {
       if (err) {
-        console.log(err);
+        console.log(err)
       }
       if (result) {
-        return res.redirect("/profile/" + req.user.username);
+        return res.redirect("/profile/" + req.user.username)
       }
-    });
+    })
   } else {
-    return res.redirect("/");
+    return res.redirect("/")
   }
-};
+}
 
 userController.likeUser = (req, res) => {
-  const update = {};
+  const update = {}
 
   if (req.body.feeling === "love") {
-    update["$push"] = { likes: [req.body.username] };
+    update["$push"] = { likes: [req.body.username] }
   } else if (req.body.feeling === "hate") {
-    update["$pull"] = { likes: req.body.username };
+    update["$pull"] = { likes: req.body.username }
   }
 
-  const filter = { username: req.user.username };
+  const filter = { username: req.user.username }
   User.findOneAndUpdate(filter, update, (err, result) => {
     if (err) {
-      console.log(err);
+      console.log(err)
     }
     if (result) {
-      return res.redirect("/profile/" + req.body.username);
+      return res.redirect("/profile/" + req.body.username)
     }
-  });
-};
+  })
+}
 
 userController.showMatches = (req, res) => {
   if (req.user) {
     User.find({ likes: req.user.username }, (err, result) => {
       if (err) {
-        console.log(err);
+        console.log(err)
       } else {
-        const content = [req.user].concat(result);
-        return res.render("matches", { user: req.user, content: content });
+        const content = [req.user].concat(result)
+        return res.render("matches", { user: req.user, content: content })
       }
-    });
+    })
   } else {
-    return res.redirect("/");
+    return res.redirect("/")
   }
-};
+}
 
-module.exports = userController;
+module.exports = userController
