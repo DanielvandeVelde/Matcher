@@ -25,5 +25,9 @@
     <main>
         {{{body}}}
     </main>
+    <script>
+        if ("serviceworker" in navigator) { window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js") })}
+    </script>
 </body>
 </html>
