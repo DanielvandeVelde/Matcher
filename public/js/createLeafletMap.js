@@ -1,16 +1,16 @@
-let marker;
-let mymap;
+let marker
+let mymap
 
 const createMap = () => {
-  const mapContainer = document.getElementById("mapContainer");
-  const div = document.createElement("div");
-  div.setAttribute("id", "mapid");
-  mapContainer.appendChild(div);
-  initMap();
-};
+  const mapContainer = document.getElementById("mapContainer")
+  const div = document.createElement("div")
+  div.setAttribute("id", "mapid")
+  mapContainer.appendChild(div)
+  initMap()
+}
 
 const initMap = () => {
-  mymap = L.map("mapid").setView([52, 5], 1);
+  mymap = L.map("mapid").setView([52, 5], 1)
 
   L.tileLayer(
     "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
@@ -28,7 +28,7 @@ const initMap = () => {
       accessToken:
         "pk.eyJ1IjoiZGFuZmllbGRlciIsImEiOiJja29lNnVvcHAwMmdpMnVsenJtN3MyMXd1In0.gqLtr0Oao-J5aqvMKwrNxw",
     }
-  ).addTo(mymap);
-};
+  ).addTo(mymap)
+}
 
-createMap();
+createMap()
