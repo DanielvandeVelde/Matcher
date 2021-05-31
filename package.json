@@ -18,6 +18,7 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
