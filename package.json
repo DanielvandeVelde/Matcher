@@ -16,6 +16,7 @@
   "main": "index.js",
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
     "gulp-sass": "^4.1.0",
     "nodemon": "^2.0.2"
   },
