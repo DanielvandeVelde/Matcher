@@ -5,8 +5,6 @@ const sourcemaps = require("gulp-sourcemaps")
 const uglify = require("gulp-uglify")
 const concat = require("gulp-concat")
 
-gulp.task("default", ["css", "js"])
-
 gulp.task("css", () => {
   return gulp
     .src("src/scss/*")
@@ -22,7 +20,4 @@ gulp.task("js", () => {
   return gulp.src("src/js/*").pipe(uglify()).pipe(gulp.dest("dist/js"))
 })
 
-gulp.task("watch", () => {
-  gulp.watch("src/scss/*", ["css"])
-  gulp.watch("src/js/*", ["minify"])
-})
+gulp.task("default", gulp.parallel("css", "js"))

@@ -1,0 +1,7 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- https://upload.wikimedia.org/wikipedia/commons/8/8c/Pompebled.svg -->
+    <g transform="rotate(-45) translate(-600 -400) scale(6 6)">
+    <path fill="#fcdbde" d="M0,12A16.143,16.143 0 0,1 -14,-4A7,8 0 0,1 -7,-12A6,8 0 0,1 -1,-5A1,1 0 1,0 1,-5A6,8 0 0,1 7,-12A7,8 0 0,1 14,-4A16.143,16.143 0 0,1 0,12z" transform="translate(100 100)" />
+    <path fill="#f47881" d="M0,12A16.143,16.143 0 0,1 -14,-4A7,8 0 0,1 -7,-12A6,8 0 0,1 -1,-5A1,1 0 1,0 1,-5A6,8 0 0,1 7,-12A7,8 0 0,1 14,-4A16.143,16.143 0 0,1 0,12z" transform="translate(101 99)" />
+    </g>
+</svg>
