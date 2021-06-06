@@ -42,48 +42,46 @@ header {
   position: fixed;
   background: #fff;
   box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.12);
-}
 
-header ul {
-  display: flex;
-}
+  ul {
+    display: flex;
+    li {
+      padding: 1em 0;
 
-header ul li {
-  padding: 1em 0;
-}
+      &:first-child {
+        margin-right: auto;
+        a {
+          color: #f46c75;
+        }
+      }
 
-header ul li a {
-  padding: 1em;
-  text-decoration: none;
-  color: #878787;
-  transition: 0.2s;
-}
+      a {
+        padding: 1em;
+        text-decoration: none;
+        color: #878787;
+        transition: 0.2s;
 
-header li a:hover,
-header li a:focus {
-  color: #f46c75;
-}
+        &:hover,
+        &:focus {
+          color: #f46c75;
+        }
 
-header ul li:first-child {
-  margin-right: auto;
-}
+        &:hover strong::before {
+          animation: beat 0.5s linear infinite alternate;
+        }
+      }
+    }
+  }
 
-header ul li:first-child a {
-  color: #f46c75;
-}
+  strong {
+    padding-left: 1.5em;
 
-header strong {
-  padding-left: 1.5em;
-}
-
-header strong::before {
-  content: "💗";
-  position: absolute;
-  transform: translateX(-1.5em);
-}
-
-header a:hover strong::before {
-  animation: beat 0.5s linear infinite alternate;
+    &::before {
+      content: "💗";
+      position: absolute;
+      transform: translateX(-1.5em);
+    }
+  }
 }
 
 main {
@@ -93,6 +91,20 @@ main {
   border-radius: 0.5em;
   background-color: #fff;
   box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.12);
+  ul {
+    margin: 1em 0;
+    li {
+      padding: 0.125em 0;
+      &::before {
+        color: #f46c75;
+        content: "⚬ ";
+      }
+    }
+  }
+
+  & > p {
+    margin: 1.5em 0;
+  }
 }
 
 h1 {
@@ -107,23 +119,6 @@ h2 {
   font-size: 1.25em;
   color: #f46c75;
   margin: 1em 0;
-}
-
-main ul {
-  margin: 1em 0;
-}
-
-main ul li {
-  padding: 0.125em 0;
-}
-
-main ul li::before {
-  color: #f46c75;
-  content: "⚬ ";
-}
-
-main > p {
-  margin: 1.5em 0;
 }
 
 main > a,
@@ -253,23 +248,21 @@ i {
   font-style: italic;
   display: flex;
   align-items: center;
-}
-
-i > a {
-  background-color: #f47881;
-  color: white;
-  transition: 0.2s;
-  display: inline-block;
-  margin-left: auto;
-  padding: 0.5em;
-  border-radius: 0.25em;
-  font-weight: bold;
-  text-decoration: none;
-  font-style: normal;
-}
-
-i > a:hover {
-  background-color: #f46c75;
+  & > a {
+    background-color: #f47881;
+    color: white;
+    transition: 0.2s;
+    display: inline-block;
+    margin-left: auto;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    font-weight: bold;
+    text-decoration: none;
+    font-style: normal;
+    &:hover {
+      background-color: #f46c75;
+    }
+  }
 }
 
 @keyframes beat {
