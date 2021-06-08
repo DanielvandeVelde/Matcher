@@ -7,7 +7,7 @@ async function login(form) {
   const url = `/login`
 
   let data = {
-    email: form.elements.email.value,
+    username: form.elements.username.value,
     password: form.elements.password.value
   }
 
@@ -29,13 +29,13 @@ async function login(form) {
     xhr.onload = function() {
       if (this.status == 200) {
         if (this.responseText === "logged in") {
-          // handle what happens when login credentials are valid
+          // handle what happens when passport authenticates
+          window.location.replace("/")
         } else {
-          // show the error returned by the server if they arent
           errorDisplay.innerHTML = this.responseText
         }
       } else {
-        console.log(this.responseText)
+        errorDisplay.innerHTML = this.responseText
       }
     }
 

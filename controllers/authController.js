@@ -70,11 +70,19 @@ userController.login = (req, res) => {
   res.render("login");
 };
 
-userController.doLogin = (req, res) => {
-  passport.authenticate("local")(req, res, () => {
-    res.redirect("/");
-  });
+userController.doLogin = (req, res, next) => {
+  passport.authenticate('local', function(err, user, info) {
+    if (!user && info) { res.send(info.message) }
+    req.logIn(user, function(err) {
+      if(user) {
+        //session needs to be set manually in a custom callback -http://www.passportjs.org/docs/authenticate/
+        req.session.user = user
+        res.send("logged in")
+      }
+    });
+  })(req, res, next);
 };
+
 
 userController.logout = async (req, res) => {
   req.logout();
