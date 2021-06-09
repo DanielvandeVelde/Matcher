@@ -1,9 +1,0 @@
-{
-  "name": "MapMatcher",
-  "short_name": "MapMatcher",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#f47881",
-  "theme_color": "#f47881",
-  "description": "Matching people based on their favorite spot in the world"
-}
