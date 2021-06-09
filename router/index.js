@@ -1,20 +1,21 @@
-const express = require("express");
-const router = express.Router();
-const auth = require("../controllers/authController.js");
+const express = require("express")
+const router = express.Router()
+const auth = require("../controllers/authController.js")
 
-router.get("/", auth.home);
+router.get("/", auth.home)
+router.get("/offline", auth.offline)
 
-router.get("/register", auth.register);
-router.post("/register", auth.doRegister);
+router.get("/register", auth.register)
+router.post("/register", auth.doRegister)
 
-router.get("/login", auth.login);
-router.post("/login", auth.doLogin);
-router.get("/logout", auth.logout);
+router.get("/login", auth.login)
+router.post("/login", auth.doLogin)
+router.get("/logout", auth.logout)
 
-router.get("/profile/:username", auth.profile);
-router.get("/edit/:username", auth.editProfile);
-router.post("/edit", auth.updateProfile);
-router.post("/likes", auth.likeUser);
-router.get("/matches", auth.showMatches);
+router.get("/profile/:username", auth.profile)
+router.get("/edit/:username", auth.editProfile)
+router.post("/edit", auth.updateProfile)
+router.post("/likes", auth.likeUser)
+router.get("/matches", auth.showMatches)
 
-module.exports = router;
+module.exports = router
