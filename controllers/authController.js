@@ -83,9 +83,9 @@ userController.doLogin = (req, res, next) => {
         req.session.user = user
         res.send("logged in")
       }
-    });
+    })
   })(req, res, next);
-};
+}
 
 
 userController.logout = async (req, res) => {
