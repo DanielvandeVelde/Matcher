@@ -7,6 +7,7 @@ const path = require("path")
 const session = require("express-session")
 const passport = require("passport")
 const LocalStrategy = require("passport-local").Strategy
+const compression = require("compression")
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -31,6 +32,7 @@ app.engine(
   })
 )
 app.set("view engine", ".hbs")
+app.use(compression())
 app.use(express.static(path.join(__dirname, "dist")))
 app.use(express.urlencoded({ extended: false }))
 app.use(

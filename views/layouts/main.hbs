@@ -6,6 +6,9 @@
     <meta name="author" content="Daniel van de Velde">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f47881">
+    <link rel="icon" href="img/icons/favicon.png">
+    <link rel="manifest" href="app.webmanifest">
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <title>Matcher</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -21,5 +24,9 @@
     <main>
         {{{body}}}
     </main>
+    <script>
+        if ("serviceworker" in navigator) { window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js") })}
+    </script>
 </body>
 </html>
