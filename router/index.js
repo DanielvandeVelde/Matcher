@@ -1,21 +1,28 @@
 const express = require("express")
 const router = express.Router()
 const auth = require("../controllers/authController.js")
+const route = require("../controllers/routeController.js")
+const user = require("../controllers/profileController.js")
+const matcher = require("../controllers/matchController.js")
 
-router.get("/", auth.home)
-router.get("/offline", auth.offline)
+// plain routes
+router.get("/", route.home)
+router.get("/offline", route.offline)
+router.get("/register", route.register)
+router.get("/login", route.login)
+router.get("/logout", route.logout)
 
-router.get("/register", auth.register)
+// authentication
 router.post("/register", auth.doRegister)
-
-router.get("/login", auth.login)
 router.post("/login", auth.doLogin)
-router.get("/logout", auth.logout)
 
-router.get("/profile/:username", auth.profile)
-router.get("/edit/:username", auth.editProfile)
-router.post("/edit", auth.updateProfile)
-router.post("/likes", auth.likeUser)
-router.get("/matches", auth.showMatches)
+// profiles
+router.get("/profile/:username", user.profile)
+router.get("/edit/:username", user.editProfile)
+router.post("/edit", user.updateProfile)
+
+// matching
+router.post("/likes", match.likeUser)
+router.get("/matches", match.showMatches)
 
 module.exports = router
