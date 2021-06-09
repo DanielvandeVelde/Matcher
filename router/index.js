@@ -16,13 +16,13 @@ router.get("/logout", route.logout)
 router.post("/register", auth.doRegister)
 router.post("/login", auth.doLogin)
 
-// profiles
+// dynamic profiles
 router.get("/profile/:username", user.profile)
 router.get("/edit/:username", user.editProfile)
 router.post("/edit", user.updateProfile)
 
 // matching
-router.post("/likes", match.likeUser)
-router.get("/matches", match.showMatches)
+router.post("/likes", matcher.likeUser)
+router.get("/matches", matcher.showMatches)
 
 module.exports = router
