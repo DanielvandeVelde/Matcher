@@ -4,6 +4,8 @@ const autoprefixer = require("gulp-autoprefixer")
 const sourcemaps = require("gulp-sourcemaps")
 const uglify = require("gulp-uglify")
 const concat = require("gulp-concat")
+const browserSync = require('browser-sync').create()
+const port = 2999
 
 gulp.task("css", () => {
   return gulp
@@ -14,6 +16,18 @@ gulp.task("css", () => {
     .pipe(sourcemaps.write())
     .pipe(sass({ outputStyle: "compressed" }))
     .pipe(gulp.dest("dist/css"))
+    .pipe(browserSync.reload({
+      stream: true
+    }))
+})
+
+gulp.task('watch', () => {
+  browserSync.init({
+    proxy: `localhost:${port}`
+  })
+  // Watchers
+  gulp.watch('./src/**/*.scss', gulp.series('css'))
+  gulp.watch('./views/*.hbs', browserSync.reload)
 })
 
 gulp.task("js", () => {
