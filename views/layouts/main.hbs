@@ -25,8 +25,16 @@
         {{{body}}}
     </main>
     <script>
-        if ("serviceworker" in navigator) { window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js") })}
+        if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js', {scope:'/'})
+        .then(function (registration)
+        {
+          console.log('Service worker registered successfully');
+        }).catch(function (e)
+        {
+          console.error('Error during service worker registration:', e);
+        });
+        }
     </script>
 </body>
 </html>
