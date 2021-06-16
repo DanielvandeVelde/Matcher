@@ -164,6 +164,7 @@ fieldset > input[type="submit"]:focus {
 }
 
 fieldset {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
@@ -191,6 +192,14 @@ label select {
 fieldset > p {
   margin: 1em 0;
   color: #f46c75;
+}
+
+span.error-display {
+  position: absolute;
+  bottom: -1.2em;
+  color: red;
+  width: 100%;
+  text-align: center;
 }
 
 #counter::first-letter {
