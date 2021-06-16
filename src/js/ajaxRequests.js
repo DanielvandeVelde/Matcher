@@ -36,7 +36,7 @@ const updateProfile = (form) => {
     gender: form.elements.gender.value,
     looking: form.elements.looking.value,
     lat: form.elements.lat.value,
-    looking: form.elements.lng.value
+    lng: form.elements.lng.value
   }
 
   sendData(url, data);
@@ -57,6 +57,10 @@ const sendData = async (url, data) => {
 
   bodyData = bodyData.join("&")
 
+  if (editForm) {
+    editForm.parentNode.classList.remove('updated')
+  }
+
   try {
     xhr.open('POST', url)
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -66,6 +70,8 @@ const sendData = async (url, data) => {
         if (this.responseText === "logged in") {
           // handle what happens when passport authenticates
           window.location.replace("/")
+        } else if (this.responseText === "updated profile") {
+          editForm.parentNode.classList.add('updated')
         } else {
           errorDisplay.innerHTML = this.responseText
         }
