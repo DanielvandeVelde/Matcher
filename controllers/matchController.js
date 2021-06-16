@@ -1,3 +1,5 @@
+const User = require("../models/user.js")
+
 const controller = {
     likeUser: (req, res) => {
         const update = {}
