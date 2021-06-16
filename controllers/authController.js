@@ -21,7 +21,11 @@ const controller = {
       req.body.password,
       err => {
         if (err) {
-          res.send(err.message)
+          if (err._message) {
+            res.send(err._message)
+          } else {
+            res.send(err.message)
+          }
         }
   
         controller.doLogin(req, res);
