@@ -50,12 +50,22 @@ handlebarsHelpers.mapClick = (handleClick) => {
   let clickEvent = "";
   if (handleClick) {
     clickEvent = ` 
+    const updateValues = (marker) => {
+      let lat = document.getElementById("lat");
+			let lng = document.getElementById("lng");
+      let form = document.getElementById("form");
+      lat.setAttribute("value", marker._latlng.lat);
+		  lng.setAttribute("value", marker._latlng.lng);
+      updateProfile(form);
+    }
 		const onMapClick = (e) => {
 			if (marker) {
 				mymap.removeLayer(marker);
 				marker = L.marker(e.latlng, {icon: redIcon}).addTo(mymap).on("click", onMarkerClick);
+        updateValues(marker)
 			} else {
 				marker = L.marker(e.latlng, {icon: redIcon}).addTo(mymap).on("click", onMarkerClick);
+        updateValues(marker)
 			}
 		};
 		mymap.on("click", onMapClick);
@@ -78,16 +88,7 @@ handlebarsHelpers.formHandling = (handleForm) => {
 			latlabel.style.display = "none";
 			lnglabel.style.display = "none";
 		};
-		hideInputs();
-
-		document.getElementById("form").onsubmit = () => {
-			if (marker) {
-				let lat = document.getElementById("lat");
-				let lng = document.getElementById("lng");
-				lat.value = marker._latlng.lat;
-				lng.value = marker._latlng.lng;
-			}
-		};`;
+		hideInputs();`;
   }
   return formEnhancement;
 };
