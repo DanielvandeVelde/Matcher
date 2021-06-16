@@ -274,6 +274,25 @@ i {
   }
 }
 
+.updated {
+  animation-name: completeFlash;
+  animation-duration: 1s;
+}
+
+@keyframes completeFlash {
+  0% {
+    background-color: white;
+  }
+
+  20% {
+    background-color: #D7FFE9;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
 @keyframes beat {
   from {
     transform: translate();

@@ -65,7 +65,7 @@ const controller = {
               console.log(err)
             }
             if (result) {
-              return res.redirect("/profile/" + req.user.username)
+              res.send("updated profile")
             }
           })
         } else {
