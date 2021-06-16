@@ -59,6 +59,25 @@ Last,
 npm run dev
 ```
 
+### Build scripts
+#### predev
+Also included: a predev script that runs `build:css` which is specified in the gulpfile.js pipeline to build css from `./src/styles.scss` (which is sass) and place the compiled css file in `public/dist`.
+
+#### prebuild
+The dist folder will be emptied and filled with a new css file every time you call `npm run dev` by running a script `prebuild` that runs `rimraf ./public/dist` which is a prebuild:css script so this will always happen right before the css is built.
+
+#### watcher
+On top of that we've included a watch:css script which watches my src folder for any changes that are made to the css and html (hbs) files and proxies a server to port 3001 by using browsersync, every time changes are made to css this refreshes the page with the new css changes you've made.
+
+[Heres](https://github.com/ReiniervanLimpt/project-tech-21/blob/main/gulpfile.js) a link to the gulpfile which includes the sass and watch script.
+
+## Resources used:
+[browsersync](https://www.npmjs.com/package/browser-sync)
+[gulp](https://www.npmjs.com/package/gulp)
+[rimraf](https://www.npmjs.com/package/rimraf)
+[nodemon](https://www.npmjs.com/package/nodemon)
+[handlebars templating](https://www.npmjs.com/package/express-handlebars)
+
 #### Environment variables
 Link your own database by creating a .env with the following:
 
