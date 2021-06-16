@@ -1,6 +1,5 @@
-async function login(form) {
-  // element to display the user if something went wrong when logging in
-  const errorDisplay = document.querySelector('.error-display')
+function login(form) {
+
   xhr = new XMLHttpRequest()
   event.preventDefault()
 
@@ -10,6 +9,13 @@ async function login(form) {
     username: form.elements.username.value,
     password: form.elements.password.value
   }
+
+  sendData(url, data);
+}
+
+async function sendData(url, data) {
+  xhr = new XMLHttpRequest()
+  const errorDisplay = document.querySelector('.error-display')
 
   // created bodyData to send though XML using this: https://stackoverflow.com/questions/35325370/how-do-i-post-a-x-www-form-urlencoded-request-using-fetch
   let bodyData = []
