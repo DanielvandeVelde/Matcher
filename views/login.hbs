@@ -1,5 +1,5 @@
 <h1>Log in</h1>
-<form action="/login" method="POST">
+<form action="/login" method="POST" onsubmit="login(this, event)">
   <fieldset>
     <legend>Login:</legend>
     <label>Username
@@ -12,6 +12,8 @@
     <label>Password
       <input type="password" required name="password" />
     </label>
+    <span class="error-display"></span>
     <input type="submit" value="Log in" />
   </fieldset>
 </form>
+<script src="/js/ajaxRequests.js"></script>
