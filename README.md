@@ -33,9 +33,33 @@ https://project-tech-2021.herokuapp.com/login
 
 </details>
 
+✅ To-do
+ Update readme
+ Update wiki further
+ Add another feature
+ Build scripts
+ Improve error-handling
+ PWA (+ improve accessibility, render-blocking, etc)
+ Add proper states
+ 
 ## ✅ To-do
-- [x] Add password hashing
-- [ ] Add matching feature
+- [ ] Remove Leaflet JS and CSS from head on unneeded pages like "/home" and "login".
+- [x] Improve input accessibility registration-page (display:none instead of visibility)
+- [x] Implement build-scripts (gzip, auto-prefixer, babel etc.)
+- [x] CSS to SCSS (+ map)
+- [ ] Proper error-handling (not only for registration-page)
+- [x] PWA (+ improve accessibility, render-blocking etc)
+- [ ] Working with states (empty, loading etc)
+- [ ] Images (minify?) and save on server as base64
+- [ ] Profile Delete feature
+- [x] Issues/wiki page for all code conventions/commit strategies/branch
+- [x] ESLint file for formatting & code consistency
+- [x] Favicon
+- [x] Update Heroku
+- [x] Add research of dating sites
+- [ ] Refactor code
+- [x] Password hashing
+- [x] Implement AJAX to check login credentials before submitting
 
 
 ## 📋 Concept
