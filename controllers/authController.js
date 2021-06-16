@@ -21,7 +21,6 @@ const controller = {
       req.body.password,
       err => {
         if (err) {
-          res.setHeader('Content-type','text/html')
           res.send(err.message)
         }
   
