@@ -3,13 +3,9 @@ if (editForm) {
   const inputs = editForm.querySelectorAll('input')
   const selects = editForm.querySelectorAll('select')
   for (i = 0; i < inputs.length; i++) {
-    if (inputs[i].id === "lng") {
-      // do nothing (only one listener is enough to know if location is changed)
-    } else {
       inputs[i].addEventListener('change', () => {
         updateProfile(editForm)
       })
-    }
   }
   for (i = 0; i < selects.length; i++) {
     selects[i].addEventListener('change', () => {
