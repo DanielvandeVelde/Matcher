@@ -11,6 +11,11 @@ if (editForm) {
       })
     }
   }
+  for (i = 0; i < selects.length; i++) {
+    selects[i].addEventListener('change', () => {
+      updateProfile(editForm)
+    })
+  }
 }
 
 const login = (form) => {
