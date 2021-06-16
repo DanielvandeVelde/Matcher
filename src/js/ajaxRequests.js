@@ -37,11 +37,11 @@ const registerUser = (form) => {
   const url = `/register`
 
   let latitude
-	let longitude
+  let longitude
 
   if (marker) {
     latitude = marker._latlng.lat;
-		longitude = marker._latlng.lng;
+    longitude = marker._latlng.lng;
   }
 
   let data = {
