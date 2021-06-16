@@ -43,6 +43,15 @@ const updateProfile = (form) => {
   sendData(url, data);
 }
 
+const updateValues = (marker) => {
+  let lat = document.getElementById("lat");
+  let lng = document.getElementById("lng");
+  let form = document.getElementById("form");
+  lat.setAttribute("value", marker._latlng.lat);
+  lng.setAttribute("value", marker._latlng.lng);
+  updateProfile(form);
+}
+
 const sendData = async (url, data) => {
   xhr = new XMLHttpRequest()
   const errorDisplay = document.querySelector('.error-display')
