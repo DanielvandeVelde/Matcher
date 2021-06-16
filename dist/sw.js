@@ -3,6 +3,7 @@ const urlstoCache = [
   "/css/main.css",
   "/img/pompebled.svg",
   "/js/createLeafletMap.js",
+  "/js/ajaxRequests.js"
 ]
 
 self.addEventListener("install", event => {
