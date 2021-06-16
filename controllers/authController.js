@@ -21,13 +21,11 @@ const controller = {
       req.body.password,
       err => {
         if (err) {
-          console.log(err)
-          return res.render("register", { err: err })
+          res.setHeader('Content-type','text/html')
+          res.send(err.message)
         }
   
-        passport.authenticate("local")(req, res, () => {
-          res.redirect("/")
-        })
+        controller.doLogin(req, res);
       }
     )
   },

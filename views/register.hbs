@@ -2,7 +2,7 @@
 {{#if err}}
   <h2>{{err.message}}</h2>
 {{/if}}
-<form action="/register" id="form" method="POST">
+<form action="/register" id="registerForm" method="POST" onsubmit="registerUser(this, event)">
   <fieldset>
     <legend>Register:</legend>
     <label>Username
@@ -64,7 +64,9 @@
       /></label>
     <section id="mapContainer"></section>
     <input type="submit" value="Register" />
+    <span class="error-display"></span>
   </fieldset>
 </form>
 <script src="/js/createLeafletMap.js"></script>
+<script src="/js/ajaxRequests.js"></script>
 {{{mapFunctionalities false true true}}}

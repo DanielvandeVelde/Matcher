@@ -279,6 +279,25 @@ i {
   animation-duration: 1s;
 }
 
+.error {
+  animation-name: errorFlash;
+  animation-duration: 1s;
+}
+
+@keyframes errorFlash {
+  0% {
+    background-color: white;
+  }
+
+  20% {
+    background-color: #FFD9D9;
+  }
+
+  100% {
+    background-color: white;
+  }
+}
+
 @keyframes completeFlash {
   0% {
     background-color: white;

@@ -1,4 +1,6 @@
 const editForm = document.getElementById('form')
+const registerForm = document.getElementById('registerForm')
+
 if (editForm) {
   const inputs = editForm.querySelectorAll('input')
   const selects = editForm.querySelectorAll('select')
@@ -23,6 +25,35 @@ const login = (form) => {
   let data = {
     username: form.elements.username.value,
     password: form.elements.password.value
+  }
+
+  sendData(url, data);
+}
+
+const registerUser = (form) => {
+
+  event.preventDefault()
+
+  const url = `/register`
+
+  let latitude
+	let longitude
+
+  if (marker) {
+    latitude = marker._latlng.lat;
+		longitude = marker._latlng.lng;
+  }
+
+  let data = {
+    username: form.elements.username.value,
+    password: form.elements.password.value,
+    email: form.elements.email.value,
+    name: form.elements.name.value,
+    gender: form.elements.gender.value,
+    age: form.elements.age.value,
+    looking: form.elements.looking.value,
+    lat: latitude,
+    lng: longitude
   }
 
   sendData(url, data);
@@ -69,6 +100,8 @@ const sendData = async (url, data) => {
 
   if (editForm) {
     editForm.parentNode.classList.remove('updated')
+  } else if (registerForm) {
+    registerForm.parentNode.classList.remove('error')
   }
 
   try {
@@ -83,6 +116,9 @@ const sendData = async (url, data) => {
         } else if (this.responseText === "updated profile") {
           editForm.parentNode.classList.add('updated')
         } else {
+          if (registerForm) {
+            registerForm.parentNode.classList.add('error')
+          }
           errorDisplay.innerHTML = this.responseText
         }
       } else {
