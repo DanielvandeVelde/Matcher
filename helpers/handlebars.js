@@ -54,12 +54,12 @@ handlebarsHelpers.mapClick = (handleClick) => {
       if (marker) {
         mymap.removeLayer(marker);
         marker = L.marker(e.latlng, {icon: redIcon}).addTo(mymap).on("click", onMarkerClick);
-        if (typeof updateValues === "function") { 
+        if (document.getElementById("form")) { 
           updateValues(marker)
         }
       } else {
         marker = L.marker(e.latlng, {icon: redIcon}).addTo(mymap).on("click", onMarkerClick);
-        if (typeof updateValues === "function") { 
+        if (document.getElementById("form")) { 
           updateValues(marker)
         }
       }
@@ -84,17 +84,7 @@ handlebarsHelpers.formHandling = (handleForm) => {
       latlabel.style.display = "none";
       lnglabel.style.display = "none";
     };
-		hideInputs();
-    if (typeof updateValues !== "function") { 
-		document.getElementById("form").onsubmit = () => {
-			if (marker) {
-				let lat = document.getElementById("lat");
-				let lng = document.getElementById("lng");
-				lat.value = marker._latlng.lat;
-				lng.value = marker._latlng.lng;
-			}
-		}
-  };`;
+		hideInputs();`;
   }
   return formEnhancement;
 };
