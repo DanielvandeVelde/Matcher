@@ -1,20 +1,28 @@
-const express = require("express");
-const router = express.Router();
-const auth = require("../controllers/authController.js");
+const express = require("express")
+const router = express.Router()
+const auth = require("../controllers/authController.js")
+const route = require("../controllers/routeController.js")
+const user = require("../controllers/profileController.js")
+const matcher = require("../controllers/matchController.js")
 
-router.get("/", auth.home);
+// plain routes
+router.get("/", route.home)
+router.get("/offline", route.offline)
+router.get("/register", route.register)
+router.get("/login", route.login)
+router.get("/logout", route.logout)
 
-router.get("/register", auth.register);
-router.post("/register", auth.doRegister);
+// authentication
+router.post("/register", auth.doRegister)
+router.post("/login", auth.doLogin)
 
-router.get("/login", auth.login);
-router.post("/login", auth.doLogin);
-router.get("/logout", auth.logout);
+// dynamic profiles
+router.get("/profile/:username", user.profile)
+router.get("/edit/:username", user.editProfile)
+router.post("/edit", user.updateProfile)
 
-router.get("/profile/:username", auth.profile);
-router.get("/edit/:username", auth.editProfile);
-router.post("/edit", auth.updateProfile);
-router.post("/likes", auth.likeUser);
-router.get("/matches", auth.showMatches);
+// matching
+router.post("/likes", matcher.likeUser)
+router.get("/matches", matcher.showMatches)
 
-module.exports = router;
+module.exports = router
